@@ -2,6 +2,7 @@ import { config as dotenv } from 'dotenv'
 import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'path'
 import { Ping, SetConnectionStatus, UnmountApp } from 'sementic_events'
+import { APP_NAME } from 'specifications'
 import { appStore } from './app-store'
 import { getGy, initGy } from './gy/init'
 import { getEvHandler, initEvHandler } from './infra/event/event-handler'
@@ -30,14 +31,14 @@ dotenv({
 })
 
 // app.commandLine.appendSwitch('disable-http-cache')
-if (!app.isDefaultProtocolClient('TYPE_HERE')) {
-  app.setAsDefaultProtocolClient('TYPE_HERE')
+if (!app.isDefaultProtocolClient(APP_NAME)) {
+  app.setAsDefaultProtocolClient(APP_NAME)
   logger.info('set as default protocol', { source: 'main', execPath: process.execPath })
 } else {
   logger.info('already set as default protocol', { source: 'main', execPath: process.execPath })
 }
 
-app.setName('TYPE_HERE')
+app.setName(APP_NAME)
 app.setAppUserModelId(app.name)
 
 // if (process.platform === 'win32') initializeRegedit()

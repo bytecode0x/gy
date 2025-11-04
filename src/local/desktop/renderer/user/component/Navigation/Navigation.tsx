@@ -2,6 +2,7 @@ import Config from 'lib/asset/svg/Config'
 import Dashboard2 from 'lib/asset/svg/Dashboard2'
 import { FlexColumnDiv, Span, SVGButton } from 'lib/frame/generic'
 import { useNavigate } from 'react-router-dom'
+import { APP_LOGO } from 'specifications'
 import styled from 'styled-components'
 
 const Container = styled(FlexColumnDiv)`
@@ -64,7 +65,7 @@ const Navigation = () => {
 
   return (
     <Container>
-      <Header>App</Header>
+      <Header>{APP_LOGO}</Header>
       <NavigationButtonUpperLayout>
         <NavigationButton
           currentAt={window.location.pathname === '/'}

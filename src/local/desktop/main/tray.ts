@@ -1,15 +1,16 @@
 import { app, globalShortcut, Menu, MenuItemConstructorOptions, nativeImage, Tray } from 'electron'
 import path from 'path'
+import { APP_ALIAS } from 'specifications'
 import { getUserWindow, toggleUserWindow } from './user-window'
 
 let tray: Tray
 
 const menu: MenuItemConstructorOptions[] = [
-  {
-    label: 'Procedure',
-    id: 'procedure',
-    submenu: []
-  },
+  // {
+  //   label: 'Procedure',
+  //   id: 'procedure',
+  //   submenu: []
+  // },
   // {
   //   label: '세션',
   //   id: 'session',
@@ -34,7 +35,7 @@ const menu: MenuItemConstructorOptions[] = [
 export function initTray() {
   tray = new Tray(nativeImage.createFromPath(path.join(__dirname, 'icon.ico')))
 
-  tray.setToolTip('Gatsby')
+  tray.setToolTip(APP_ALIAS)
   tray.on('double-click', function () {
     const window = getUserWindow()
     window.show()
