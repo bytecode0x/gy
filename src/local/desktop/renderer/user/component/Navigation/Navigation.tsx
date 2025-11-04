@@ -11,30 +11,10 @@ const Container = styled(FlexColumnDiv)`
   align-items: center;
   padding: 24px 6px;
   border-right: 1px solid var(--color-border-base);
-
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  & > * {
-    -webkit-app-region: no-drag;
-  }
-
-  & > * {
-    margin: 6px 0px;
-  }
-
-  & svg {
-    width: 16px;
-    height: 16px;
-  }
 `
 
 const Header = styled(Span)`
-  font-size: 20px;
+  font-size: 13px;
   font-weight: bold;
 `
 

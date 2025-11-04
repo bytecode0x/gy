@@ -1,4 +1,4 @@
-import { FlexColumnDiv, FlexDiv } from 'lib/frame/generic/molecule'
+import { FlexCenterDiv, FlexColumnDiv, FlexDiv } from 'lib/frame/generic/molecule'
 import { useCallback, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import { RendererReady } from 'sementic_events'
@@ -33,7 +33,11 @@ const App = () => {
       <Navigation />
 
       <ContentLayout>
-        <Top>Top</Top>
+        <Top>
+          <TopLeft>tl</TopLeft>
+          <DragHandleArea>Drag Area</DragHandleArea>
+          <TopRight>tr</TopRight>
+        </Top>
         <Middle>
           <Routes>
             <Route path='/' element={<RootPage />} />
@@ -62,6 +66,15 @@ const Top = styled(FlexDiv)`
   height: 60px;
 
   border-bottom: 1px solid var(--color-border-base);
+`
+
+const TopLeft = styled(FlexDiv)``
+
+const TopRight = styled(FlexDiv)``
+
+const DragHandleArea = styled(FlexCenterDiv)`
+  flex: 1;
+  -webkit-app-region: drag;
 `
 
 const Middle = styled(FlexColumnDiv)`

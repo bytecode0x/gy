@@ -3,6 +3,7 @@ import { BrowserWindow, shell } from 'electron'
 import assert from 'assert'
 import path from 'path'
 import { RendererReady } from 'sementic_events'
+import { APP_NAME } from 'specifications'
 import { getEvHandler } from './infra/event/event-handler'
 import { logger } from './infra/logger'
 
@@ -17,8 +18,8 @@ export async function initializeUserWindow(options?: Electron.BrowserWindowConst
       minHeight: 350,
       width: 800,
       height: 600,
-      title: 'TYPE_HERE',
-      // frame: false,
+      title: APP_NAME,
+      frame: false,
       // titleBarStyle: 'hidden',
       // titleBarOverlay: {
       //   color: '#fafafa',
@@ -33,8 +34,8 @@ export async function initializeUserWindow(options?: Electron.BrowserWindowConst
         contextIsolation: false,
         // contextIsolation: true,
         webSecurity: true,
-        // devTools: process.env.NODE_ENV !== 'production',
-        devTools: true,
+        devTools: process.env.NODE_ENV !== 'production',
+        // devTools: true,
         // webviewTag: true,
         preload: `${__dirname}/ee11cbb19052e40b07aac0ca060c23ee.js`,
 
