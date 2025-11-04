@@ -9,7 +9,7 @@ const ArrowRight2 = () => {
       xmlns='http://www.w3.org/2000/svg'
     >
       <rect width='48' height='48' fill='white' fillOpacity='0.01' />
-      <path d='M19 12L31 24L19 36' strokeWidth='4' strokeLinecap='round' strokeLinejoin='round' />
+      <path d='M19 12L31 24L19 36' strokeWidth='4' strokeLinecap='round' strokeLinejoin='round' color='currentColor' />
     </svg>
   )
 }

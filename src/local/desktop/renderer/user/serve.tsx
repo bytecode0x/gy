@@ -5,7 +5,7 @@ import App from './App'
 import { getDocument, initShadowRoot } from './function/document'
 import { initStore } from './store'
 
-Object.assign(window, { eh: { sendEvent: console.log, onEvent: console.log } })
+Object.assign(window, { eh: { sendEvent: console.log, onEvent: console.log, removeAllEventListenerOn: console.log } })
 
 initShadowRoot()
 

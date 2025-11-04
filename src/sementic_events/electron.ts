@@ -117,6 +117,8 @@ export type FocusWindow = EventMatrix<'FOCUS_WINDOW', 'RENDERER', 'MAIN'>
 
 export type CloseWindow = EventMatrix<'CLOSE_WINDOW', 'RENDERER', 'MAIN'>
 
+export type MaximizeWindow = EventMatrix<'MAXIMIZE_WINDOW', 'RENDERER', 'MAIN'>
+
 export type AlwaysOnTopWindow = EventMatrix<'ALWAYS_ON_TOP_WINDOW', 'RENDERER', 'MAIN', boolean>
 
 export type SetVisible = EventMatrix<'SET_VISIBLE', 'RENDERER', 'MAIN', boolean>

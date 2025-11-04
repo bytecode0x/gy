@@ -19,10 +19,9 @@ const StyledSwitch = styled(FlexDiv)<{
   $disabled?: boolean
   sizeLevel?: number
 }>`
+  align-items: center;
   position: relative;
-  display: inline-block;
 
-  /* 높이 기준으로 전체 스위치 크기 비율 */
   --h: ${({ sizeLevel }) => sizeLevel || 25}px;
   --w: calc(var(--h) * 16 / 9);
 
@@ -37,24 +36,24 @@ const StyledSwitch = styled(FlexDiv)<{
 
   &::before {
     content: '';
-    position: absolute;
+    // position: absolute;
+    position: relative;
 
-    --pad: calc(var(--h) * 0.065);
-    top: var(--pad);
-    left: var(--pad);
+    --pad: calc(var(--h) * (1 - 0.85) / 2);
+    --d: calc(var(--h) * 0.85);
+    // top: var(--pad);
+    // left: var(--pad);
 
-    /* 둥근 스위치의 크기 (전체 높이의 85%) */
-    width: calc(var(--h) * 0.85);
-    height: calc(var(--h) * 0.85);
+    width: var(--d);
+    height: var(--d);
     border-radius: 50%;
 
     background: white;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
     transition: transform 0.25s ease;
 
-    /* 이동 거리: 전체 너비 - 스위치 크기 - 여백*2 */
     transform: ${({ $checked }) =>
-      $checked ? 'translateX(calc(var(--w) - var(--h) * 0.85 - var(--pad) * 2))' : 'translateX(0)'};
+      $checked ? 'translateX(calc(var(--w) - var(--d) - var(--pad) * 2 + var(--pad)))' : 'translateX(var(--pad))'};
   }
 
   ${Container}:focus-within & {

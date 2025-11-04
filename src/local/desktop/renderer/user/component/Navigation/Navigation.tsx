@@ -1,5 +1,6 @@
 import Config from 'lib/asset/svg/Config'
 import Dashboard2 from 'lib/asset/svg/Dashboard2'
+import HorizontalThreeDots from 'lib/asset/svg/HorizontalThreeDots'
 import { FlexColumnDiv, Span, SVGButton } from 'lib/frame/generic'
 import { useNavigate } from 'react-router-dom'
 import { APP_LOGO } from 'specifications'
@@ -65,6 +66,10 @@ const Navigation = () => {
           }}
         >
           <Config />
+        </NavigationButton>
+
+        <NavigationButton currentAt={window.location.pathname === '$'}>
+          <HorizontalThreeDots />
         </NavigationButton>
       </NavigationButtonLowerLayout>
     </Container>

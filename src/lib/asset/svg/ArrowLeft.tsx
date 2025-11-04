@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ArrowLeft = () => {
   return (
     <svg
@@ -12,14 +10,9 @@ const ArrowLeft = () => {
       color='currentColor'
     >
       <rect width='48' height='48' fill='white' fillOpacity='0.01' />
-      <path
-        d='M31 36L19 24L31 12'
-        strokeWidth='4'
-        strokeLinecap='round'
-        strokeLinejoin='round'
-      />
+      <path d='M31 36L19 24L31 12' strokeWidth='4' strokeLinecap='round' strokeLinejoin='round' color='currentColor' />
     </svg>
-  );
-};
+  )
+}
 
-export default ArrowLeft;
+export default ArrowLeft

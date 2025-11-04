@@ -43,7 +43,7 @@ export function openAssistant(options: Action<__Action__OpenAIAssistant>['value'
 
     const eh = getEvHandler()
 
-    eh.book.DIALOG = { component: 'RENDERER', id: assistantWindow.webContents.id }
+    // eh.book.DIALOG = { component: 'RENDERER', id: assistantWindow.webContents.id }
 
     // ipcTable.set('DIALOG', assistantWindow.id)
 

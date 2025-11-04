@@ -1,10 +1,15 @@
-import { FlexCenterDiv, FlexColumnDiv, FlexDiv } from 'lib/frame/generic/molecule'
+import ArrowLeft from 'lib/asset/svg/ArrowLeft'
+import ArrowRight2 from 'lib/asset/svg/ArrowRight2'
+import Square from 'lib/asset/svg/Square'
+import { FlexCenterDiv, FlexColumnDiv, FlexDiv, SVGButton } from 'lib/frame/generic/molecule'
 import { useCallback, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { RendererReady } from 'sementic_events'
+import { MaximizeWindow, RendererReady } from 'sementic_events'
 import styled, { createGlobalStyle, keyframes } from 'styled-components'
 import shallow from 'zustand/shallow'
+import CloseWindow from './component/CloseWindow'
 import Navigation from './component/Navigation'
+import { getDocument } from './function/document'
 import ConfigPage from './page/ConfigPage'
 import RootPage from './page/RootPage'
 import { getStore } from './store'
@@ -18,12 +23,43 @@ const App = () => {
 
   const navigate = useNavigate()
 
+  const maximizeWindow = useCallback(function () {
+    window.eh.sendEvent<MaximizeWindow>({
+      name: 'MAXIMIZE_WINDOW',
+      meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+    })
+  }, [])
+
+  const backwards = useCallback(function () {
+    navigate(-1)
+  }, [])
+  const forwards = useCallback(function () {
+    navigate(1)
+  }, [])
+
+  const showDescOnHover = useCallback((e: MouseEvent) => {
+    if (!(e.target instanceof HTMLElement)) return
+    const desc =
+      (e.target as HTMLElement).getAttribute('data-desc')?.trim() ||
+      (e.target as HTMLElement).getAttribute('data-desc2')?.trim()
+    if (!desc) return
+    const footer = getDocument().querySelector('#footer') as HTMLDivElement
+    if (footer) footer.innerText = desc
+    const cleanup = () => {
+      footer.innerText = ''
+      e.target?.removeEventListener('mouseleave', cleanup)
+    }
+    e.target.addEventListener('mouseleave', cleanup)
+  }, [])
+
   useEffect(function () {
     window.eh.sendEvent<RendererReady>({
       name: 'RENDERER_READY',
       meta: { receiver: { component: 'MAIN', alias: 'MAIN' } },
       payload: window.eh.id as number
     })
+
+    getDocument().addEventListener('mouseover', showDescOnHover)
   }, [])
 
   return (
@@ -34,9 +70,25 @@ const App = () => {
 
       <ContentLayout>
         <Top>
-          <TopLeft>tl</TopLeft>
-          <DragHandleArea>Drag Area</DragHandleArea>
-          <TopRight>tr</TopRight>
+          <TopLeft>
+            <UtilityLayout>
+              <SVGButton data-desc='뒤로' onClick={backwards}>
+                <ArrowLeft />
+              </SVGButton>
+              <SVGButton data-desc='앞으로' onClick={forwards}>
+                <ArrowRight2 />
+              </SVGButton>
+            </UtilityLayout>
+          </TopLeft>
+          <DragHandleArea onDoubleClick={maximizeWindow}>Drag Area</DragHandleArea>
+          <TopRight>
+            <UtilityLayout>
+              <SVGButton data-desc='최대화' onClick={maximizeWindow}>
+                <Square />
+              </SVGButton>
+              <CloseWindow />
+            </UtilityLayout>
+          </TopRight>
         </Top>
         <Middle>
           <Routes>
@@ -44,7 +96,7 @@ const App = () => {
             <Route path='/config' element={<ConfigPage />} />
           </Routes>
         </Middle>
-        <Bottom>Bottom</Bottom>
+        <Bottom id='footer'>Bottom</Bottom>
       </ContentLayout>
       <PushMessageContainer id='push'>push</PushMessageContainer>
     </Container>
@@ -71,6 +123,30 @@ const Top = styled(FlexDiv)`
 const TopLeft = styled(FlexDiv)``
 
 const TopRight = styled(FlexDiv)``
+
+const UtilityLayout = styled(FlexDiv)`
+  align-items: flex-start;
+  // justify-content: flex-end;
+
+  padding: 6px;
+
+  & > button {
+    border-radius: 4px;
+    background-color: white;
+    padding: 4px;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+  }
+
+  & > button:not(:first-of-type) {
+    margin-left: 4px;
+  }
+
+  & svg {
+    width: 12px;
+    height: 12px;
+    color: #6b6b6b;
+  }
+`
 
 const DragHandleArea = styled(FlexCenterDiv)`
   flex: 1;

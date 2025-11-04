@@ -4,13 +4,18 @@ import { FC, PropsWithChildren, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
 const Container = styled(FlexColumnDiv)`
+  border-radius: var(--border-radius-default, 4px);
+  box-shadow: var(--shadow-elevation, 0 1px 2px rgba(0, 0, 0, 0.15));
+  background-color: white;
+
   justify-content: center;
   align-items: stretch;
 
   padding: 4px 12px;
 
   & + & {
-    bordoer-top: 1px solid var(--color-border-cell);
+    // border-top: 1px solid var(--color-border-cell);
+    margin-top: 6px;
   }
 `
 
