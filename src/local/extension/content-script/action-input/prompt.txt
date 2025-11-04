@@ -1,0 +1,132 @@
+import RawStringInput from 'lib/components/RawStringInput'
+import { ActionDesigner, Prompt } from 'lib/gy/core/type/action'
+import { useCallback, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import Play from 'shared/assets/svg/Play'
+import { TableBody, TableData, TableHeader, TableRow } from 'lib/frame/generic'
+import { SVGButton } from 'lib/frame/generic'
+import { pushMessage } from 'lib/util/dom/render'
+import { getEvHandler } from '../content-event-handler'
+import { safeGetBody } from '../effects'
+import { SpecificationTable } from '../frames'
+import { getPreviousSnapshots, getUpperSnapshots } from '../functions'
+import { getStore, setOverlay } from '../store'
+
+export const PROMPT: ActionDesigner<Prompt> = {
+  /**
+   * should prompt value be evaluated as well?
+   */
+  help: '프롬프트를 띄워 값을 입력받습니다',
+  template: 'PROMPT',
+  onNameChange(as) {
+    const flag = Object.values(as.spread)[0]
+    as.snapshot = { [as.name]: [[`${as.name} 에 대해 입력한 값이 여기 들어갑니다`]] }
+    as.spread = { [as.name]: flag }
+  },
+  design({ as }) {
+    const designSchema = useCallback(function () {
+      const { cache, setState } = getStore().getState()
+
+      const ps = cache.procedures.find((ps) => ps.tasks.flat().some((ts) => ts.actions.includes(as)))
+
+      if (!ps)
+        return pushMessage({
+          message: 'DESIGNER:SELECT:NO_PROC_SCHEMA_MATCHED',
+          layer: safeGetBody().querySelector('#push')
+        })
+
+      const ts = ps.tasks.flat().find((ts) => ts.actions.includes(as))
+
+      if (!ts)
+        return pushMessage({
+          message: 'DESIGNER:SELECT:NO_TASK_SCHEMA_MATCHED',
+          layer: safeGetBody().querySelector('#push')
+        })
+
+      const substitutes = getUpperSnapshots(ps, ts)
+        .concat(getPreviousSnapshots(ts, as))
+        .reduce(function (prev, curr) {
+          return Object.assign(prev, curr)
+        }, {})
+
+      const evHandler = getEvHandler()
+
+      const snapshot: Record<string, any> = { ...as.snapshot }
+
+      const revertOverlay = setOverlay(
+        <RawStringInput
+          configurable
+          initial={{ [as.name]: '' }}
+          onReject={function () {
+            revertOverlay()
+          }}
+          onResolve={function (record, interpretedRecord) {
+            for (const [key, value] of Object.entries(interpretedRecord)) {
+              if (!matrixSchema.safeParse(value).success)
+                return pushMessage({
+                  message: `entry ${key} is not being resolved in matrix`,
+                  layer: safeGetBody().querySelector('#push')
+                })
+              snapshot[key] = value.resolve
+            }
+            setter(record)
+            revertOverlay()
+          }}
+          interpret={(raw) =>
+            evHandler.sendEvent<Interpret>({
+              name: 'INTERPRET',
+              payload: {
+                raw,
+                header: { edr: substitutes }
+              },
+              meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+            })
+          }
+        />
+      )
+    }, [])
+
+    useEffect(function init() {
+      if (as.value !== undefined) return
+
+      designSchema()
+    })
+
+    return createPortal(
+      <SVGButton
+        data-desc='수정하기'
+        // disabled={!action}
+        onClick={designSchema}
+      >
+        <Play />
+      </SVGButton>,
+      safeGetBody().querySelector('#as-util')!
+    )
+  },
+  specify({ as }) {
+    return (
+      <SpecificationTable>
+        <TableBody>
+          <TableRow>
+            {['기본값'].map((key, index) => (
+              <TableHeader key={index}>{key}</TableHeader>
+            ))}
+          </TableRow>
+          {as.value?.defaultValue && (
+            <TableRow>
+              <TableData>{as.value.defaultValue}</TableData>
+            </TableRow>
+          )}
+          {/* {as.snapshot[as.name] &&
+        as.snapshot[as.name].map((row, rowIndex) => (
+          <TableRow key={rowIndex}>
+            {row.map((value, colIndex) => (
+              <TableData key={colIndex}>{value}</TableData>
+            ))}
+          </TableRow>
+        ))} */}
+        </TableBody>
+      </SpecificationTable>
+    )
+  }
+}

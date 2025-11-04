@@ -1,0 +1,12 @@
+node_modules
+yarn.lock
+build
+dst
+dist
+bundle
+electron
+yarn-error
+pgdata
+secret.txt
+
+ckeditor5/node_modules

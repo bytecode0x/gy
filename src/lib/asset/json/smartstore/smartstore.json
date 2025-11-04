@@ -1,0 +1,538 @@
+[
+  {
+    "example": "예시) 신상품",
+    "explanation": "신상품,중고상품 중 선택하여 입력해 주세요.\n중고, 리퍼, 전시 등의 상품은 중고상품으로 선택해야 합니다.\n중고상품을 신상품으로 설정하여 판매하는 경우 판매금지 및 네이버쇼핑 미노출 조치될 수 있습니다.\n* 작성 후 2행~4행(주황색 영역)은 제거하고 업로드해 주세요.",
+    "isRequired": "필수",
+    "literal": "신상품:중고상품",
+    "optionCode": "smartstore,0,r",
+    "optionName": "상품상태"
+  },
+  {
+    "example": "50000807",
+    "explanation": "카테고리 찾기 팝업에서 선택한 카테고리 코드를 입력해주세요.\n",
+    "isRequired": "필수",
+    "literal": "{category}(smartstore)",
+    "optionCode": "smartstore,1,r",
+    "optionName": "카테고리ID"
+  },
+  {
+    "example": "호리호리 베이지 골지니트 플레어원피스 베이지 골지니트원피스",
+    "explanation": "100자까지 입력할 수 있습니다.\n일부 특수문자는 사용할 수 없습니다.",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,2,r",
+    "optionName": "상품명"
+  },
+  {
+    "example": "10000",
+    "explanation": "숫자만 입력할 수 있습니다.\n10원 단위로 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,3,r",
+    "optionName": "판매가"
+  },
+  {
+    "example": "10",
+    "explanation": "숫자만 입력할 수 있습니다.\n1개 이상 입력해 주세요.\n* 옵션 재고를 사용하시는 경우 옵션 재고수량으로 대체됩니다. ",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,4,r",
+    "optionName": "재고수량"
+  },
+  {
+    "example": "토요일 10:00 ~ 14:00 까지 응대가 가능하며 일요일은 쉽니다.",
+    "explanation": "HTML은 입력하실 수 없습니다.",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,5,r",
+    "optionName": "A/S 안내내용"
+  },
+  {
+    "example": "02-0000-0000",
+    "explanation": "숫자와 \"-\"만 입력할 수 있습니다.\n20자 이내로 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "{tel}",
+    "optionCode": "smartstore,6,r",
+    "optionName": "A/S 전화번호"
+  },
+  {
+    "example": "1.jpg",
+    "explanation": "권장 크기 : 640x640\njpg, jpeg, gif, png, bmp 형식의 정지 이미지만 등록됩니다. \n(움직이는 이미지인 경우 첫 번째 컷이 등록)\n일부 특수문자는 사용할 수 없습니다.\n(80자 이내)",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,7,r",
+    "optionName": "대표 이미지 파일명"
+  },
+  {
+    "example": "추가이미지1.jpg, 추가이미지2.jpg",
+    "explanation": "권장 크기 : 640x640\njpg, jpeg, gif, png, bmp 형식의 정지 이미지만 등록됩니다. \n(움직이는 이미지인 경우 첫 번째 컷이 등록)\n* 각각의 추가이미지는 \",\"로 구분해주세요.\n* 추가이미지는 최대 9개까지 등록하실 수 있습니다. \n일부 특수문자는 사용할 수 없습니다.\n(80자 이내)",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,8,ir",
+    "optionName": "추가 이미지 파일명"
+  },
+  {
+    "example": "<img src=\"http://bshop.phinf.naver.net/aaa.jpg\">",
+    "explanation": "외부 호스팅에 올린 이미지 url을 사용하여 표시하는 것은 가능하며,\n네이버 외 외부로 연결되거나 팝업을 띄우는 링크는 사용이 제한됩니다.",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,9,r",
+    "optionName": "상품 상세정보"
+  },
+  {
+    "example": "1111111",
+    "explanation": "30자 이내로 입력해 주세요.\n일부 특수문자는 사용할 수 없습니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,10,ir",
+    "optionName": "판매자 상품코드"
+  },
+  {
+    "example": "222222",
+    "explanation": "30자 이내로 입력해 주세요.\n일부 특수문자는 사용할 수 없습니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,11,ir",
+    "optionName": "판매자 바코드"
+  },
+  {
+    "example": "동광인터내셔날",
+    "explanation": "제조사명을 정확히 입력해주세요.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,12,ir",
+    "optionName": "제조사"
+  },
+  {
+    "example": "SOUP",
+    "explanation": "브랜드명을 정확히 입력해주세요.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,13,ir",
+    "optionName": "브랜드"
+  },
+  {
+    "example": "42583",
+    "explanation": "yyyy-MM-dd 형식으로 입력 해 주세요. \n(예: 2012-12-10)",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,14,ir",
+    "optionName": "제조일자"
+  },
+  {
+    "example": "42583",
+    "explanation": "yyyy-MM-dd 형식으로 입력해 주세요. \n(예: 2012-12-10)",
+    "isRequired": "비필수",
+    "literal": "{date}",
+    "optionCode": "smartstore,15,ir",
+    "optionName": "유효일자"
+  },
+  {
+    "example": "과세상품",
+    "explanation": "과세상품,면세상품,영세상품 중 선택하여 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "과세상품:영세상품:면세상품",
+    "optionCode": "smartstore,16,r",
+    "optionName": "부가세"
+  },
+  {
+    "example": "Y",
+    "explanation": "Y : 미성년자 구매가능\nN : 미성년자 구매불가",
+    "isRequired": "필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,17,r",
+    "optionName": "미성년자 구매"
+  },
+  {
+    "example": "Y",
+    "explanation": "Y : 노출함\nN : 노출안함\n* 식품의 경우 [노출 안함]을 선택하면 구매평이 노출되지 않습니다.\n* 일반 상품은 Y[노출함]으로 자동 등록됩니다.",
+    "isRequired": "필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,18,r",
+    "optionName": "구매평 노출여부"
+  },
+  {
+    "example": "9680",
+    "explanation": "원산지 찾기 팝업에서 검색한 원산지 코드를 입력해 주세요. \n* 셀 서식을 텍스트로 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "{origin}(smartstore)",
+    "optionCode": "smartstore,19,r",
+    "optionName": "원산지 코드"
+  },
+  {
+    "example": "",
+    "explanation": "원산지를 \"수입산\"으로 선택한 경우 필수로 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,20,d",
+    "optionName": "수입사"
+  },
+  {
+    "example": "N",
+    "explanation": "Y : 원산지가 다른 상품을 등록 시\nN : 원산지 같음\n* Y인 경우 상세정보에 상품별 원산지를 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,21,r",
+    "optionName": "복수원산지 여부"
+  },
+  {
+    "example": "",
+    "explanation": "기타 > 직접입력인 경우 필수로 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,22,d",
+    "optionName": "원산지 직접입력"
+  },
+  {
+    "example": "택배‚ 소포‚ 등기",
+    "explanation": "배송상품인 경우 택배/소포/등기,직접배송(화물배달) 항목 중에서 선택하여 입력해 주세요.\n입력하지 않으면 배송없음 상품으로 등록됩니다.",
+    "isRequired": "조건부 필수",
+    "literal": "택배,소포,등기[smartstore,24,d/smartstore,29,d/smartstore,30,d]:직접배송[smartstore,24,d/smartstore,29,d]:배송없음",
+    "optionCode": "smartstore,23,r",
+    "optionName": "배송방법"
+  },
+  {
+    "example": "조건부 무료",
+    "explanation": "배송 상품인 경우 필수로 입력해 주세요.\n무료,조건부무료,유료,수량별부과 항목 중 선택하여 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "무료:조건부무료[smartstore,25,d/smartstore,26,d/smartstore,27,d]:유료[smartstore,25,d/smartstore,26,d]:수량별부과[smartstore,25,d/smartstore,26,d/smartstore,28]",
+    "optionCode": "smartstore,24,d",
+    "optionName": "배송비 유형"
+  },
+  {
+    "example": "2500",
+    "explanation": "배송비 유형이 조건부무료,유료,수량별부과인 경우 필수입니다. \n배송비가 있는 경우 10원 단위로  입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,25,d",
+    "optionName": "기본배송비"
+  },
+  {
+    "example": "착불 또는 선결제",
+    "explanation": "기본 배송비가 있는 경우 필수입니다. \n착불,선결제,착불 또는 선결제 항목 중 선택하여 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "선결제:착불:착불 또는 선결제",
+    "optionCode": "smartstore,26,d",
+    "optionName": "배송비 결제방식"
+  },
+  {
+    "example": "30000",
+    "explanation": "배송비 유형이 조건부 무료인 경우 필수입니다. 무료배송가능한 상품판매가 합계 금액을 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,27,d",
+    "optionName": "조건부무료-상품판매가합계"
+  },
+  {
+    "example": "",
+    "explanation": "배송비 유형이 \"수량별 부과\"인 경우 필수입니다. 반복부과될 상품개수를 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,28,d",
+    "optionName": "수량별부과-수량"
+  },
+  {
+    "example": "2500",
+    "explanation": "배송 상품인 경우 필수로 입력해 주세요. 10원 이상 10원 단위로 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,29,d",
+    "optionName": "반품배송비"
+  },
+  {
+    "example": "2500",
+    "explanation": "배송 상품인 경우 필수로 입력해 주세요. 10원 이상 10원 단위로 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,30,d",
+    "optionName": "교환배송비"
+  },
+  {
+    "example": "영종동의 경우 톨게이트 비용 1만원 추가됩니다.",
+    "explanation": "제주/도서산간을 제외한 지역별 차등배송비가 있을 경우 상세내용을 입력해 주세요. 50자까지 입력할 수 있습니다. 일부 특수문자는 사용할 수 없습니다.\n제주/도서산간 추가배송비는 상품등록 이후 '배송/상품별 배송비'에서 설정할 수 있습니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,31,ir",
+    "optionName": "지역별 차등배송비 정보"
+  },
+  {
+    "example": "N",
+    "explanation": "Y : 별도설치비 있음\nN : 별도설치비 없음\n미입력의 경우 \"별도설치비 없음\"으로 자동 등록됩니다.",
+    "isRequired": "비필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,32,ir",
+    "optionName": "별도설치비"
+  },
+  {
+    "example": "",
+    "explanation": "청약철회, 배송기간 및 방법, 교환/반품의 보증 및 추가비용, 판매일시/판매지역/판매수량/인도지역 등과 관련해서 특이사항이 있는 경우 입력해 주세요.\n일부 특수문자는 사용할 수 없습니다.\n미입력의 경우 \"특이사항 없음\"으로 자동 등록됩니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,33,ir",
+    "optionName": "판매자 특이사항"
+  },
+  {
+    "example": "1000",
+    "explanation": "구매자가 해당 상품의 구매시 즉시 할인되어 구매할 수 있는 할인금액을 설정할 수 있습니다.\nPC/모바일 전체에 적용됩니다.\n* 정액 : 최소 10원 ~ 최대 판매가 미만 (10원 단위) \n* 정율 : 1%~ 99% (1% 단위)",
+    "isRequired": "비필수",
+    "literal": "{number}[smartstore,35,d]",
+    "optionCode": "smartstore,34,ir",
+    "optionName": "즉시할인 값"
+  },
+  {
+    "example": "원",
+    "explanation": "즉시할인을 설정하는 경우, %, 원 중에 선택하여 입력해 주세요.\nPC/모바일 전체에 적용됩니다.",
+    "isRequired": "조건부 필수",
+    "literal": "%:원",
+    "optionCode": "smartstore,35,d",
+    "optionName": "즉시할인 단위"
+  },
+  {
+    "example": "3",
+    "explanation": "복수구매할인을 적용할 주문금액이나 주문 수량을 입력해 주세요.",
+    "isRequired": "비필수",
+    "literal": "{number}[smartstore,37,d/smartstore,38,d/smartstore,39,d]",
+    "optionCode": "smartstore,36,ir",
+    "optionName": "복수구매할인 조건 값"
+  },
+  {
+    "example": "개",
+    "explanation": "복수구매할인을 적용할 경우 주문금액이나 수량에 따라 원,개를 선택해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "원:개",
+    "optionCode": "smartstore,37,d",
+    "optionName": "복수구매할인 조건 단위"
+  },
+  {
+    "example": "500",
+    "explanation": "구매자가 설정한 주문금액이나 수량 이상으로 구매시 할인금액을 설정합니다. \n주문번호 단위로 1회 할인됩니다.\n* 정액 : 최소 10원 ~ 최대 판매가 미만 (10원 단위) \n* 정율 : 1%~ 99% (1% 단위)",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,38,d",
+    "optionName": "복수구매할인 값"
+  },
+  {
+    "example": "원",
+    "explanation": "복수구매할인을 설정할 경우, %, 원 중에 선택하여 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "%:원",
+    "optionCode": "smartstore,39,d",
+    "optionName": "복수구매할인 단위"
+  },
+  {
+    "example": "100",
+    "explanation": "구매자가 해당 상품을 구매시 지급하는 포인트를 설정할 수 있습니다. \n* 정액 : 최소 10원 ~ 최대 20%, 10만원 (1원 단위) \n* 정률 : 최소 0.1% ~ 최대 20%, 10만원 (0.1% 단위)",
+    "isRequired": "비필수",
+    "literal": "{number}[smartstore,41,d]",
+    "optionCode": "smartstore,40,ir",
+    "optionName": "상품구매시 포인트 지급 값"
+  },
+  {
+    "example": "원",
+    "explanation": "%, 원 중에 단위를 선택하여 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "%:원",
+    "optionCode": "smartstore,41,d",
+    "optionName": "상품구매시 포인트 지급 단위"
+  },
+  {
+    "example": "100",
+    "explanation": "구매자가 해당 상품을 구매 후 텍스트 리뷰 작성 시 지급하는 포인트를 설정할 수 있습니다. \n* 지급금액 : 최소 10원 ~ 최대 판매가의 20%원",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,42,ir",
+    "optionName": "텍스트리뷰 작성시 지급 포인트"
+  },
+  {
+    "example": "500",
+    "explanation": "구매자가 해당 상품을 구매 후 포토/동영상 리뷰 작성 시 지급하는 포인트를 설정할 수 있습니다. \n* 지급금액 : 최소 10원 ~ 최대 판매가의 20%원",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,43,ir",
+    "optionName": "포토/동영상 리뷰 작성시 지급 포인트"
+  },
+  {
+    "example": "100",
+    "explanation": "구매자가 해당 상품을 구매 후 한달사용 텍스트 리뷰 작성 시 지급하는 포인트를 설정할 수 있습니다. \n* 지급금액 : 최소 10원 ~ 최대 판매가의 20%원",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,44,ir",
+    "optionName": "한달사용\n텍스트리뷰 작성시 지급 포인트"
+  },
+  {
+    "example": "500",
+    "explanation": "구매자가 해당 상품을 구매 후 한달사용 포토/동영상 리뷰 작성 시 지급하는 포인트를 설정할 수 있습니다. \n* 지급금액 : 최소 10원 ~ 최대 판매가의 20%원",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,45,ir",
+    "optionName": "한달사용\n포토/동영상리뷰 작성시 지급 포인트"
+  },
+  {
+    "example": "100",
+    "explanation": "톡톡친구/스토어찜회원인 구매자가 해당 상품을 구매 후 리뷰 작성 시 지급하는 포인트를 설정할 수 있습니다. (1회 지급) \n* 지급금액 : 최소 10원 ~ 최대 판매가의 20%원",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,46,ir",
+    "optionName": "톡톡친구/스토어찜고객\n리뷰 작성시 지급 포인트"
+  },
+  {
+    "example": "6",
+    "explanation": "구매자에게 무이자 할부를 제공할 수 있습니다.\n3,6,9,12개월로 숫자만 입력해 주세요. ",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "smartstore,47,ir",
+    "optionName": "무이자 할부 개월"
+  },
+  {
+    "example": "양말",
+    "explanation": "구매자에게 제공할 사은품이 있으시면 입력해 주세요.\n100자까지 입력할 수 있습니다.\n일부 특수문자는 사용할 수 없습니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,48,ir",
+    "optionName": "사은품"
+  },
+  {
+    "example": "단독형",
+    "explanation": "옵션을 사용할 경우 아래 형태 중 하나를 선택해주세요.\n단독형/조합형/입력형",
+    "isRequired": "비필수",
+    "literal": "단독형[smartstore,50,d/smartstore,51,d]:조합형[smartstore,50,d/smartstore,51,d/smartstore,52,d/smartstore,53,d]:입력형[smartstore,50,d]",
+    "optionCode": "smartstore,49,r",
+    "optionName": "옵션형태"
+  },
+  {
+    "example": "컬러\n사이즈",
+    "explanation": "옵션형태를 선택한 경우 옵션명을 입력해 주세요.\n최대 3개까지 입력하실 수 있습니다.\n각각의 옵션명은 줄바꿈(엔터)로 구분해주세요.\n예) \n옵션명1\n옵션명2\n옵션명3\n* 각 옵션명은 최대 20자까지 입력할 수 있습니다.",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,50,d",
+    "optionName": "옵션명"
+  },
+  {
+    "example": "빨강,노랑,파랑\nS,M,L",
+    "explanation": "단독형,조합형 옵션의 경우 옵션값을 입력해 주세요.\n옵션명이 추가되어 있는 경우 줄바꿈(엔터)로 구분해주세요.\n각각의 옵션값은 \",\"로 구분해주세요.\n예) \n빨강,노랑,파랑\nS,M,L\n90,95,100\n",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,51,d",
+    "optionName": "옵션값"
+  },
+  {
+    "example": "",
+    "explanation": "조합형 옵션의 경우 옵션가를 입력해 주세요.\n각각의 옵션가는 \",\"로 구분해주세요.\n예) \n0,100,1000\n0,0,0\n0,10,20\n* 옵션가를 입력치 않으시면 0으로 자동 등록됩니다.\n* 옵션가가 0인 옵션이 있어야 등록됩니다.\n* 옵션가는 판매가 기준으로 입력할 수 있습니다.. \n- 판매가 0원 ~ 2,000원 미만 : 0 ~ 100%\n- 판매가 2,000원 ~ 10,000원 미만 : -50% ~ +100%\n- 판매가 10,000원 이상 : - 50% ~ +50%",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,52,d",
+    "optionName": "옵션가"
+  },
+  {
+    "example": "",
+    "explanation": "조합형 옵션의 경우 첫번째 옵션값 만큼만 옵션재고수량을 입력해 주세요.\n각각의 옵션재고수량은 \",\"로 구분해주세요.\n예) 1,10,20\n* 첫번째 옵션값에 옵션 재고수량이 적용되어 조합되는 옵션 전체에 동일한 재고수량이 적용됩니다.\n* 재고수량 0인 경우 사용여부 N으로 등록됩니다.   \n",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,53,d",
+    "optionName": "옵션 재고수량"
+  },
+  {
+    "example": "",
+    "explanation": "추가상품을 사용할 경우 추가상품명을 입력해 주세요.\n최대 10개까지 입력하실 수 있습니다.\n각각의 추가상품명은 줄바꿈(엔터)로 구분해주세요.\n예) \n추가상품명1\n추가상품명2\n* 각 추가상품명은 최대 20자까지 입력할 수 있습니다.",
+    "isRequired": "비필수",
+    "literal": "{string}[smartstore,55,d/smartstore,56,d/smartstore,57,d]",
+    "optionCode": "smartstore,54,ir",
+    "optionName": "추가상품명"
+  },
+  {
+    "example": "",
+    "explanation": "추가상품명을 입력한 경우 추가상품값을 입력해 주세요.\n각각의 추가상품값은 \",\"로 구분해주세요.\n예) \n양말1,양말2,양말3\n모자1,모자2,모자3\n",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,55,d",
+    "optionName": "추가상품값"
+  },
+  {
+    "example": "",
+    "explanation": "추가상품명을 입력한 경우 추가상품가를 입력해 주세요.\n각각의 추가상품가는 \",\"로 구분해주세요.\n예) \n0,100,1000\n0,0,0\n* 추가상품가를 입력치 않으시면 0으로 자동 등록됩니다.\n",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,56,d",
+    "optionName": "추가상품가"
+  },
+  {
+    "example": "",
+    "explanation": "추가상품명을 입력한 경우 추가상품재고수량를 입력해 주세요.\n각각의 추가상품재고수량은 \",\"로 구분해주세요.\n예) \n1,10,20\n20,20,20\n* 재고수량 0인 경우 사용여부 N으로 등록됩니다.  \n",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,57,d",
+    "optionName": "추가상품 재고수량"
+  },
+  {
+    "example": "",
+    "explanation": "50자까지 입력할 수 있습니다. 일부 특수문자는 사용할 수 없습니다.\n미입력의 경우 \"상세정보에 표시\"로 자동 등록됩니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,58,ir",
+    "optionName": "상품정보제공고시 품명"
+  },
+  {
+    "example": "V68SKM304Z",
+    "explanation": "30자까지 입력할 수 있습니다.\n일부 특수문자는 사용할 수 없습니다.\n미입력의 경우 \"상세정보에 표시\"로 자동 등록됩니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,59,ir",
+    "optionName": "상품정보제공고시 모델명"
+  },
+  {
+    "example": "",
+    "explanation": "200자까지 입력할 수 있습니다.\n일부 특수문자는 사용할 수 없습니다.\n미입력의 경우 \"해당사항 없음\"으로 자동 등록됩니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,60,ir",
+    "optionName": "상품정보제공고시 인증허가사항"
+  },
+  {
+    "example": "동광인터내셔날",
+    "explanation": "200자까지 입력할 수 있습니다.\n일부 특수문자는 사용할 수 없습니다.\n미입력의 경우 \"상세정보에 표시\"로 자동 등록됩니다.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,61,ir",
+    "optionName": "상품정보제공고시 제조자"
+  },
+  {
+    "example": "N",
+    "explanation": "Y : 스마트스토어 스토어찜회원만 구매가능\nN : 전체 구매가능\n* Y 선택시 이 상품은 스토어찜회원만 구매할 수 있습니다.",
+    "isRequired": "필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,62,r",
+    "optionName": "스토어찜회원 전용여부"
+  },
+  {
+    "example": "Y",
+    "explanation": "도서 일반, 해외도서, 중고도서, 유아동전집, 여행/문화>공연/티켓 카테고리 선택 시 입력해주세요.\nY : 소득공제 가능\nN : 소득공제 불가능\n* 잡지, 정가제free 카테고리는 대상이 아닙니다.",
+    "isRequired": "조건부 필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,63,ir",
+    "optionName": "문화비 소득공제"
+  },
+  {
+    "example": "9156545654499",
+    "explanation": "도서 일반, 해외도서, 중고도서, 유아동전집 카테고리 선택 시 필수로 입력해주세요.\n* 잡지, 정가제free 카테고리의 경우 비필수로 필요 시 입력하세요.\n(ISBN-13, 13자리 숫자) \n",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,64,ir",
+    "optionName": "ISBN"
+  },
+  {
+    "example": "Y",
+    "explanation": "도서 일반, 해외도서, 중고도서, 유아동전집, 정가제free 카테고리 선택 시 입력해주세요. 독립출판물인 경우 ISBN은 입력하지 않아도 됩니다.\nY : 독립출판물\nN : 일반출판물\n",
+    "isRequired": "조건부 필수",
+    "literal": "Y:N",
+    "optionCode": "smartstore,65,ir",
+    "optionName": "독립출판"
+  },
+  {
+    "example": "91345235",
+    "explanation": "잡지 카테고리 선택 시 입력해주세요.\n(8자리 숫자)",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "smartstore,66,ir",
+    "optionName": "ISSN"
+  }
+]

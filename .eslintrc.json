@@ -1,0 +1,103 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        // "moduleDirectory": ["node_modules", "src", "F:\\Projects\\share\\src"]
+        "moduleDirectory": ["node_modules", "src"]
+      }
+    }
+  },
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "arrow-body-style": "off",
+    "prefer-arrow-callback": "off",
+    // React library
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["off"],
+    // need to set module's base url in settings key
+    "import/no-unresolved": "error",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never",
+        "jsx": "never",
+        "js": "never"
+      }
+    ],
+    "react/function-component-definition": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".jsx"] }],
+    // better detour using env
+    "no-console": "off",
+    "no-unused-expressions": "warn",
+    // stongly recommended for ts projects in official document
+    "no-undef": "off",
+    "no-param-reassign": "warn",
+    "jsx-a11y/no-autofocus": "off",
+    "jsx-a11y/control-has-associated-label": "off",
+    "no-shadow": "warn",
+    // eslint considiers type as value
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    // even though default values are assigned on optional props
+    // this rule keeps bothering
+    "react/require-default-props": "off",
+    "no-else-return": "off",
+    "no-lonely-if": "off",
+    "import/prefer-default-export": "off",
+    "no-promise-executor-return": "off",
+    // type attribute of button element keeps bothering for no reason
+    "react/button-has-type": "off",
+    "no-underscore-dangle": "off",
+    "treact/jsx-props-no-spreading": "off",
+    "no-var": "off",
+    "vars-on-top": "off",
+    "react/no-array-index-key": "off",
+    "no-nested-ternary": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-useless-escape": "warn",
+    "react/jsx-no-useless-fragment": "warn",
+    "no-restricted-syntax": "off",
+    "import/no-extraneous-dependencies" : "off",
+    "no-bitwise" : "off",
+    "no-plusplus" : "off",
+    "no-continue" : "off",
+    "prefer-regex-literals" : "off",
+    "func-names" : "off",
+    "react/react-in-jsx-scope" : "off",
+    "no-await-in-loop" : "off",
+    "react/no-this-in-sfc" : "off",
+    "max-classes-per-file" : "off",
+    "react/jsx-no-bind" : "off",
+    "consistent-return" : "off",
+    "camelcase" : "off",
+    "no-case-declarations" :"off",
+    "class-methods-use-this" : "off",
+    "no-async-promise-executor" : "off",
+    "no-template-curly-in-string" :"off",
+    "no-eval" : "off",
+    "react/no-unstable-nested-components" : "off",
+    "no-new-func" :"off",
+    "import/no-dynamic-require" : "off",
+    "global-require" : "off",
+    "no-dupe-class-members": "off",
+    "react/prop-types": "off"
+  }
+}

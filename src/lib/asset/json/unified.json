@@ -1,0 +1,194 @@
+[
+  {
+    "example": "신상품",
+    "explanation": "신상품, 중고상품 중 선택하여 입력해 주세요",
+    "isRequired": "필수",
+    "literal": "신상품:중고상품",
+    "optionCode": "unified,1,r:smartstore,0,r/interpark,3,r/st11,20,r",
+    "optionName": "상품상태"
+  },
+  {
+    "example": "베리베리 맛있는 사탕",
+    "explanation": "상품명을 입력해주세요",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "unified,2,r:smartstore,2,r/interpark,1,r/st11,10,r",
+    "optionName": "상품명"
+  },
+  {
+    "example": "500",
+    "explanation": "상품이 판매 될 가격을 입력해주세요",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "unified,3,r:smartstore,3,r/interpark,16,r/st11,31,r",
+    "optionName": "판매가"
+  },
+  {
+    "example": "99",
+    "explanation": "상품의 재고를 숫자로 입력해주세요",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "unified,4,r:smartstore,4,r/interpark,14,r/st11,46,d",
+    "optionName": "재고"
+  },
+  {
+    "example": "",
+    "explanation": "카테고리 찾기 버튼을 눌러 플랫폼별 카테고리 코드를 검색하세요",
+    "isRequired": "필수",
+    "literal": "{category}(unified)",
+    "optionCode": "unified,25,r:smartstore,1,r/st11,9,r",
+    "optionName": "카테고리"
+  },
+  {
+    "example": "택배",
+    "explanation": "상품의 배송 방법을 배송없음, 택배, 직접배송 중 입력해 주세요",
+    "isRequired": "필수",
+    "literal": "배송없음:택배[st11,60,d/st11,61,d/unified,6,d/unified,9,d/unified,10,d]:우편, 소포, 등기[unified,6,d/unified,9,d/unified,10,d]:퀵 서비스[unified,6,d/unified,9,d/unified,10,d]:직접배송[unified,6,d/unified,9,d/unified,10,d]",
+    "optionCode": "unified,5,r:smartstore,23,r/interpark,7,r/st11,59,r",
+    "optionName": "배송방법"
+  },
+  {
+    "example": "유료",
+    "explanation": "배송 상품인 경우 필수로 입력해 주세요.\n무료,조건부무료,유료,수량별부과 항목 중 선택하여 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "무료:조건부무료[unified,7,d/unified,8,d]:유료[unified,7,d/unified,8,d]:수랑별부과[unified,7,d/unified,8,d]",
+    "optionCode": "unified,6,d:smartstore,24,d/interpark,9,d/st11,62,r",
+    "optionName": "배송비 유형"
+  },
+  {
+    "example": "2500",
+    "explanation": "배송비 유형이 조건부무료,유료,수량별부과인 경우 필수입니다. \n배송비가 있는 경우 10원 단위로  입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "unified,7,d:smartstore,25,d/interpark,10,d/st11,63,r",
+    "optionName": "기본 배송비"
+  },
+  {
+    "example": "선불",
+    "explanation": "기본 배송비가 있는 경우 필수입니다. \n착불,선결제,착불 또는 선결제 항목 중 선택하여 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "선불:후불:선불 또는 후불",
+    "optionCode": "unified,8,d:smartstore,26,d/interpark,8,d/st11,66,r",
+    "optionName": "배송비 결제 방식"
+  },
+  {
+    "example": "2500",
+    "explanation": "배송 상품인 경우 필수로 입력해 주세요. 10원 이상 10원 단위로 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "unified,9,d:smartstore,29,d/st11,67,r",
+    "optionName": "반품 배송비"
+  },
+  {
+    "example": "5000",
+    "explanation": "배송 상품인 경우 필수로 입력해 주세요. 10원 이상 10원 단위로 입력해 주세요.",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "unified,10,d:smartstore,30,d/st11,69,r",
+    "optionName": "교환 배송비"
+  },
+  {
+    "example": "아니오",
+    "explanation": "상품이 성인전용인지 예, 아니오 중 입력해 주세요",
+    "isRequired": "필수",
+    "literal": "예:아니오",
+    "optionCode": "unified,11,r:smartstore,17,r/interpark,4,ir/st11,21,r",
+    "optionName": "성인 전용"
+  },
+  {
+    "example": "1.jpg, 2.png",
+    "explanation": "상품이 검색됐을 때 표시될 이미지를 업로드 후 파일 이름을 입력하세요 쉼표(,)로 구분하여 복수 입력 가능하며 플랫폼 별로 최대 개수가 제한되어 있습니다 (네이버 10개, 인터파크 1개, 11번가 4개) 플랫폼 별 최대 개수가 넘어가는 경우 가장 앞쪽에서 부터 적용됩니다\n",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "unified,12,r:smartstore,7,r/smartstore,8,ir/interpark,0,r/st11,22,r/st11,23,ir/st11,24,ir/st11,25,ir",
+    "optionName": "대표 이미지"
+  },
+  {
+    "example": "3.jpg, 4.png",
+    "explanation": "상품의 상세 정보에 쓰일 이미지를 업로드 후 파일의 이름을 입력하세요 쉼표(,)로 구분하여 복수 입력 가능합니다",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "unified,13,r:smartstore,9,r/st11,26,r",
+    "optionName": "상세 정보"
+  },
+  {
+    "example": "조합형",
+    "explanation": "옵션을 사용할 경우 아래 형태 중 하나를 선택해주세요.\n단독형/조합형/입력형",
+    "isRequired": "필수",
+    "literal": "옵션없음:단독형[unified,15,d/unified,16,d]:조합형[unified,15,d/unified,16,d/unified,17,d/unified,18,d]:입력형[unified,15,d]",
+    "optionCode": "unified,14,r:smartstore,49,r/st11,40,ir",
+    "optionName": "옵션형태"
+  },
+  {
+    "example": "맛\n크기",
+    "explanation": "옵션형태를 선택한 경우 옵션명을 입력해 주세요.\n최대 3개까지 입력하실 수 있습니다.\n각각의 옵션명은 줄바꿈(엔터)로 구분해주세요.\n예) \n옵션명1\n옵션명2\n옵션명3\n* 각 옵션명은 최대 20자까지 입력할 수 있습니다.",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "unified,15,d:smartstore,50,d/st11,41,d",
+    "optionName": "옵션명"
+  },
+  {
+    "example": "딸기맛,초코맛\nS,M,L",
+    "explanation": "단독형,조합형 옵션의 경우 옵션값을 입력해 주세요.\n옵션명이 추가되어 있는 경우 줄바꿈(엔터)로 구분해주세요.\n각각의 옵션값은 \",\"로 구분해주세요.\n예) \n빨강,노랑,파랑\nS,M,L\n90,95,100",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "unified,16,d:smartstore,51,d/st11,42,d",
+    "optionName": "옵션값"
+  },
+  {
+    "example": "0,200\n0,200,500",
+    "explanation": "조합형 옵션의 경우 옵션가를 입력해 주세요.\n각각의 옵션가는 \",\"로 구분해주세요.\n예) \n0,100,1000\n0,0,0\n0,10,20\n* 옵션가를 입력치 않으시면 0으로 자동 등록됩니다.\n* 옵션가가 0인 옵션이 있어야 등록됩니다.\n* 옵션가는 판매가 기준으로 입력할 수 있습니다.. \n- 판매가 0원 ~ 2,000원 미만 : 0 ~ 100%\n- 판매가 2,000원 ~ 10,000원 미만 : -50% ~ +100%\n- 판매가 10,000원 이상 : - 50% ~ +50%",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "unified,17,d:smartstore,52,d/st11,43,d",
+    "optionName": "옵션가"
+  },
+  {
+    "example": "99,99",
+    "explanation": "조합형 옵션의 경우 첫번째 옵션값 만큼만 옵션재고수량을 입력해 주세요.\n각각의 옵션재고수량은 \",\"로 구분해주세요.\n예) 1,10,20\n* 첫번째 옵션값에 옵션 재고수량이 적용되어 조합되는 옵션 전체에 동일한 재고수량이 적용됩니다.\n* 재고수량 0인 경우 사용여부 N으로 등록됩니다.   ",
+    "isRequired": "조건부 필수",
+    "literal": "{string}",
+    "optionCode": "unified,18,d:smartstore,53,d/st11,44,d",
+    "optionName": "옵션재고"
+  },
+  {
+    "example": "과세상품",
+    "explanation": "과세상품,면세상품,영세상품 중 선택하여 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "과세상품:면세상품:영세상품",
+    "optionCode": "unified,19,r:smartstore,16,r/interpark,15,r/st11,18,r",
+    "optionName": "부가세"
+  },
+  {
+    "example": "50원",
+    "explanation": "상품의 할인 값과 단위(원, %)를 입력해주세요 예) 1000원 또는 5% 등의 꼴",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "unified,20,ir:smartstore,34,ir/smartstore,35,d/st11,34,ir",
+    "optionName": "즉시할인"
+  },
+  {
+    "example": "",
+    "explanation": "구매대행 상품을 가져오는 경우 해당 상품의 판매가가 원가로 입력되며 배율을 설정한 경우 판매가에 자동으로 계산되어 입력됩니다 예를 들어 타오바오에서 700원에 파는 상품을 가져오는 경우 원가는 700원이며 배율을 2배로 설정했을 경우 판매가는 자동으로 1400원으로 설정됩니다",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "unified,21,d",
+    "optionName": "원가"
+  },
+  {
+    "example": "포장을 풀었을 경우 환불이 어렵습니다!",
+    "explanation": "HTML은 입력하실 수 없습니다.",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "unified,23,r:smartstore,5,r/interpark,20,r/st11,70,r",
+    "optionName": "A/S 안내내용"
+  },
+  {
+    "example": "010-1234-5678",
+    "explanation": "숫자와 \"-\"만 입력할 수 있습니다.\n20자 이내로 입력해 주세요.",
+    "isRequired": "필수",
+    "literal": "{tel}",
+    "optionCode": "unified,24,r:smartstore,6,r",
+    "optionName": "A/S 전화번호"
+  }
+]

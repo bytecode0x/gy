@@ -1,0 +1,16 @@
+import React from 'react'
+
+const Smartstore = () => {
+  return (
+    <svg width='512px' height='512px' viewBox='0 0 512 512' version='1.1' xmlns='http://www.w3.org/2000/svg'>
+      <title>스마트스토어 옵션</title>
+
+      <path
+        fill='currentColor'
+        d='M9 32V480H181.366V255.862L331.358 480H504V32H331.358V255.862L181.366 32H9Z'
+      />
+    </svg>
+  )
+}
+
+export default Smartstore

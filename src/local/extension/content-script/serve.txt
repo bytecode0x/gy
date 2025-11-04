@@ -1,0 +1,97 @@
+/* eslint-disable no-template-curly-in-string */
+// import 'shared/global.css'
+import { createContainer, mountApp } from './functions/app'
+// import './index.css'
+
+createContainer()
+mountApp({
+  config: {
+    alwaysOntop: false,
+    version: '1.0.0',
+    extensionBrowser: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe --profile-directory="Default"',
+    workDir: 'C:\\documents',
+    maximumWorkers: 3,
+    minimumPageLoadThreshold: 500,
+    strict: false,
+    preserveTree: true,
+    extensionOffset: { left: '0', right: '0' },
+    language: 'kr',
+    theme: 'dark'
+  },
+  cache: {
+    procedures: [],
+    scripts: []
+  },
+  $procedures: [
+    {
+      version: '1.0.0',
+      name: 'proc1',
+      pid: 'p1',
+      effect: {
+        scriptIds: ['s1', 's2'],
+        config: { disabled: [] }
+      },
+      hash: '',
+
+      config: {
+        preserveTree: true,
+        strict: false,
+        invokeEffectImmediately: true,
+        waitOnEffectResolved: true
+      },
+      descriptive: '',
+      tags: [{ name: 'tag1', color: '#303017', descriptive: 'this is a tag for testing' }],
+      triggers: []
+    },
+    {
+      version: '1.0.0',
+      pid: 'c57abca1-30c2-4288-9ed5-fd37b42f42a7',
+      hash: '',
+
+      config: {
+        preserveTree: true,
+        strict: false,
+        invokeEffectImmediately: true,
+        waitOnEffectResolved: true
+      },
+      descriptive: '',
+      name: '1688',
+      effect: { scriptIds: [], config: { disabled: [] } },
+      triggers: [
+        [
+          {
+            template: 'CONTEXT_BUTTON',
+            id: 'f9256815-7888-4d3a-83e5-39dc902e8441',
+            name: '1688',
+            value: {
+              name: '1688',
+              documentUrlPatterns: ['https://detail.1688.com/*']
+            },
+            pid: 'c57abca1-30c2-4288-9ed5-fd37b42f42a7',
+            on: false
+          }
+        ]
+      ]
+    }
+  ],
+  $scripts: [
+    {
+      hash: '',
+      size: 0,
+      name: '스크립트1',
+      sid: 's1',
+      version: ''
+    },
+    {
+      hash: '',
+      size: 0,
+      name: '스크립트2',
+      sid: 's2',
+      version: ''
+    }
+  ],
+  gdr: { },
+  $gdr: {}
+})
+
+// initializeIpcEvHandler()

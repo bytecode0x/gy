@@ -1,0 +1,38 @@
+import { ExtensionIpcEvHandler } from 'extension/lib/class/IpcEvHandler'
+import { Echo } from 'sementic_events'
+
+declare global {
+  interface Window {
+    ipcEvHandler: ExtensionIpcEvHandler
+  }
+}
+
+let ipcEvHandler: ExtensionIpcEvHandler
+
+export function initializeIpcEvHandler() {
+  try {
+    ipcEvHandler = new ExtensionIpcEvHandler({ name: 'gatsby-extension', url: 'ws://localhost:15171' })
+    if (process.env.NODE_ENV === 'development') window.ipcEvHandler = ipcEvHandler
+    return ipcEvHandler
+  } catch (err: any) {
+    // user client is not executed
+    const anchor = document.createElement('a')
+    anchor.href = `gatsby://${btoa('nothing')}`
+    anchor.click()
+    anchor.remove()
+  }
+}
+
+export function getIpcEvHandler() {
+  if (!ipcEvHandler) throw new Error('IPC_EVENT_HANDLER_NOT_INITIALIZED')
+  return ipcEvHandler
+}
+
+export function registerIpcEvListeners() {
+  if (!ipcEvHandler) throw new Error('IPC_EVENT_HANDLER_NOT_INITIALIZED')
+
+  ipcEvHandler.onEvent<Echo>('ECHO', async function (e) {
+    console.log(`GOT A ECHO EVENT-${e.id} : ${e.payload}`)
+    return e.payload
+  })
+}

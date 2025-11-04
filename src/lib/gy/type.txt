@@ -1,0 +1,59 @@
+import { interpret, interpretObj, serialize } from 'lib/gy/core/function'
+import { ActionConsumer, ActionDesigner, ActionInterfaceSuperset } from 'lib/gy/core/object/action'
+import { TriggerCanceler, TriggerInterfaceSuperset, TriggerSetter } from 'lib/gy/core/object/trigger'
+import { getSessions } from 'lib/gy/core/property/sessions'
+import { getWorkdir, setWorkdir } from 'lib/gy/core/property/workdir'
+import { initiate } from 'lib/gy/method/initiate'
+import { invokeEffect } from 'lib/gy/method/invoke'
+import { pause, resume } from 'lib/gy/method/pause'
+import { ProcedureDescriptor } from './core/object/procedure'
+import { ScriptDescriptor } from './core/object/script'
+import { DataRecord, RawDataRecord } from './core/primitive'
+
+export type Gatsby<
+  TActionPreset extends ActionInterfaceSuperset = ActionInterfaceSuperset,
+  TTriggerPreset extends TriggerInterfaceSuperset = TriggerInterfaceSuperset,
+  TContext extends {} = any
+> = {
+  action: {
+    // preset: Array<ActionInterfaceSuperset>
+    consume: ActionConsumer<TActionPreset, TContext>
+    design: ActionDesigner<TActionPreset>
+  }
+  trigger: {
+    // preset: Array<TriggerInterfaceSuperset>
+    set: TriggerSetter<TTriggerPreset>
+    // pull({ template, id, value }) {},
+    cancel: TriggerCanceler<TTriggerPreset>
+  }
+  resource: {
+    preset: []
+    generate: ({ template, value }: { template: string; value: any }) => Promise<any>
+    dispose: ({ template, id }: { template: string; id: string | number }) => Promise<any>
+  }
+
+  store: {
+    $procedures: Array<ProcedureDescriptor>
+    $scripts: Array<ScriptDescriptor>
+    $gdr: RawDataRecord
+    gdr: DataRecord
+    gs: Record<string, boolean>
+    version: string
+  }
+
+  interpret: typeof interpret
+  interpretObj: typeof interpretObj
+  // serialize: ({ value, serializer, options }: { value: any; serializer: 'matrix' | 'json'; options?: any }) => string
+  serialize: typeof serialize
+
+  start: typeof initiate
+  stop: ({ pid }: { pid: string }) => Promise<any>
+  stopAll: () => Promise<any>
+  pause: typeof pause
+  resume: typeof resume
+  invoke: typeof invokeEffect
+  getSessions: typeof getSessions
+  // getStore: typeof getStore
+  getWorkdir: typeof getWorkdir
+  setWorkdir: typeof setWorkdir
+}

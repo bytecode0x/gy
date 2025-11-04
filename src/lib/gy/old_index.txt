@@ -1,0 +1,40 @@
+export function initGy<
+  TActionPreset extends ActionInterfaceSuperset = ActionInterfaceSuperset,
+  TTriggerPreset extends TriggerInterfaceSuperset = TriggerInterfaceSuperset,
+  TContext extends {} = {}
+>({
+  action,
+  resource,
+  trigger,
+  store
+}: {
+  action: Gatsby<TActionPreset, TTriggerPreset, TContext>['action']
+  trigger: Gatsby<TActionPreset, TTriggerPreset, TContext>['trigger']
+  resource: Gatsby<TActionPreset, TTriggerPreset, TContext>['resource']
+  store: Gatsby<TActionPreset, TTriggerPreset, TContext>['store']
+}) {
+  const gy: Gatsby<TActionPreset, TTriggerPreset, TContext> = {
+    action,
+    trigger,
+    resource,
+    store,
+    interpret,
+    interpretObj,
+    serialize,
+    start: initiate,
+    stop({ pid }) {
+      return Promise.resolve()
+    },
+    stopAll() {
+      return Promise.resolve()
+    },
+    pause,
+    resume,
+    invoke: invokeEffect,
+    getSessions,
+    getWorkdir,
+    setWorkdir
+  }
+
+  return gy
+}

@@ -1,0 +1,91 @@
+import { SuperCoreLayerMessage } from 'lib/event/type'
+import { z } from 'zod'
+import { DataRecord, InterpretedDataProperty, Matrix, RawStringProperty } from '../types/shared'
+
+type TypeToZod<T> = {
+  [K in keyof T]: T[K] extends string | number | boolean | null | undefined | any
+    ? undefined extends T[K]
+      ? z.ZodOptional<z.ZodType<Exclude<T[K], undefined>>>
+      : z.ZodType<T[K]>
+    : z.ZodObject<TypeToZod<T[K]>>
+}
+
+export function validateMessage(message: SuperCoreLayerMessage) {
+  const schema = z.object({
+    name: z.string(),
+    payload: z.any(),
+    meta: z.object({
+      msgId: z.string(),
+      receiver: z
+        .object({ component: z.literal('SERVER'), alias: z.string() })
+        .or(z.object({ component: z.literal('SERVER'), id: z.string().or(z.number()) })),
+      sender: z
+        .object({ component: z.literal('MAIN'), alias: z.literal('MAIN') })
+        .or(z.object({ component: z.literal('MAIN'), id: z.string().or(z.number()) }))
+      // .object({ component: z.string(), alias: z.string() })
+      // .or(z.object({ component: z.string(), id: z.string().or(z.number()) }))
+    })
+  })
+
+  return schema.safeParse(message)
+}
+
+const rawStringSchema: z.ZodSchema<RawStringProperty> = z.lazy(function () {
+  return z.object({
+    value: z.string(),
+    interpretation: z.array(
+      z.object({
+        parser: z.union([z.literal('json'), z.literal('matrix'), z.literal('function'), z.literal('none')]),
+        parseOptions: z
+          .optional(
+            z.object({
+              json: z.object({ reviver: rawStringSchema }),
+              matrix: z.object({
+                splitWithEscaped: z.boolean().or(rawStringSchema),
+                columnSeparator: z.string().or(rawStringSchema),
+                rowSeparator: z.string().or(rawStringSchema)
+              }),
+              function: z.object({ params: z.array(z.object({ id: z.string(), value: z.any() })).or(rawStringSchema) }),
+              none: z.object({})
+            })
+          )
+          .optional(),
+        constraint: z.optional(
+          z
+            .object({
+              json: z.array(z.string()),
+              matrix: z.array(z.string()),
+              function: z.array(z.string()),
+              none: z.array(z.string())
+            })
+            .optional()
+        )
+      })
+    ),
+    resolve: z.any().optional()
+  })
+})
+
+const interpretedDataSchema: z.ZodSchema<InterpretedDataProperty> = z.object({
+  value: z.any(),
+  serializer: z.union([z.literal('json'), z.literal('matrix')]),
+  serializeOptions: z.union([
+    z
+      .object({
+        replacer: z.array(z.string().or(z.number())).optional().nullable(),
+        space: z.union([z.number(), z.string()]).optional()
+      })
+      .partial(),
+    z
+      .object({
+        joinWithEscaped: z.boolean().optional(),
+        columnSeparator: z.string().optional(),
+        rowSeparator: z.string().optional()
+      })
+      .partial()
+  ])
+})
+
+export const matrixSchema: z.ZodSchema<Matrix> = z.array(z.array(z.string()))
+
+export const dataRecordSchema: z.ZodSchema<DataRecord> = z.record(z.string(), z.array(z.array(z.string())))

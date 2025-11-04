@@ -1,0 +1,40 @@
+import { getStore } from 'extension/content-script/store'
+import { LocalProcedureSchema } from 'lib/entity/procedure'
+import { FC, useCallback } from 'react'
+import { FlexColumnDiv, TextButton } from 'lib/frame/generic'
+import styled from 'styled-components'
+
+const Container = styled(FlexColumnDiv)`
+  flex: 0 1;
+  width: 300px;
+  height: 70vh;
+  min-width: 200px;
+  min-height: 450px;
+  background-color: white;
+  border-radius: var(--border-radius-default) var(--border-radius-default) 0 0;
+`
+const Item = styled(TextButton)``
+
+type ProcedureSelectorProps = {
+  onClick: (proc: LocalProcedureSchema) => void
+}
+
+const ProcedureSelector: FC<ProcedureSelectorProps> = ({ onClick }) => {
+  const procedures = getStore()(useCallback((state) => state.procedureSchemas, []))
+  return (
+    <Container>
+      {procedures.map((proc, index) => (
+        <Item
+          key={proc.id}
+          onClick={function (e) {
+            onClick(proc)
+          }}
+        >
+          {proc.name}
+        </Item>
+      ))}
+    </Container>
+  )
+}
+
+export default ProcedureSelector

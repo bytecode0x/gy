@@ -1,0 +1,48 @@
+window.eh.sendEvent({ name: 'GET_STORE', meta: { receiver: { component: 'MAIN', alias: 'MAIN' } } })
+
+window.eh.sendEvent({ name: 'DIALOG', meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }, payload: { type: 'image-editor', header: 'test', imageUrls: ['https://cdn.daisomall.co.kr/file/PD/20250624/JMH1cWHlOPjjlUyWL8tO1028741_01_01JMH1cWHlOPjjlUyWL8tO.jpg/dims/resize/850/format/avif/optimize']  } })
+
+window.eh.sendEvent({ name: 'INTERPRET', payload: { raw: '$<matrix|parse|${t}>', header: { edr: { t: [['$<json|parse|1000>']] } } }, meta: { receiver: { component: 'MAIN', alias: 'MAIN' } } })
+
+window.eh.sendEvent({ name: 'CONSOLE_LOG', meta: { receiver: { component: 'CONTENT_SCRIPT', id:  } }, payload: 'hi' })
+
+window.eh
+        .sendEvent({
+          name: 'INVOKE_EFFECT',
+          payload: {
+            effect: {
+              config: { disabled: [] },
+              scriptIds: ['1e5e7cbb-5cc2-4431-be3f-b7a4e7f0aaaf', 'bcc94359-7905-4a8a-8168-855eacca272f']
+            },
+            treePaths: [String.raw`C:\Users\user\Desktop\product\tree\daiso_1065043.json`],
+          },
+          meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+        })
+
+
+window.eh.sendEvent({ name: 'CONSUME', payload: { action: {
+    template: 'EVAL_BINDING_TAB',
+    id: '',
+    name: 'coordinates',
+    schema: '',
+    state: 'WATING',
+    /** @type { import('local/desktop/main/gy/type/action.preset').__Action__EvalBindingTab['value'] } */
+    value: {
+      tabId: 944901613,
+      coordinates_code
+    }
+  } }, meta: { receiver: { component: 'MAIN', alias: 'MAIN' } } })
+
+
+  window.eh.sendEvent({ name: 'CONSUME', payload: { $action: {
+    template: 'DEFINE',
+    id: '',
+    name: 'test',
+    schema: '',
+    state: 'WATING',
+    value: {
+        confirm: '$<json|parse|true>',
+        title: 'test',
+        record: { a: '1', b: '2' }
+    }
+  } }, meta: { receiver: { component: 'MAIN', alias: 'MAIN' } } })

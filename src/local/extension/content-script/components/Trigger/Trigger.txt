@@ -1,0 +1,119 @@
+import { getStore } from 'extension/content-script/store'
+import { TriggerRecord } from 'lib/entity/trigger'
+import { FC, memo, useCallback, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Remove3 from 'shared/assets/svg/Remove3'
+import Write from 'shared/assets/svg/Write'
+import { FlexCenterDiv, FlexDiv, SVGButton } from 'lib/frame/generic'
+import styled from 'styled-components'
+
+const Container = styled(FlexDiv)`
+  min-width: 450px;
+  padding: 16px;
+  border: 1px solid var(--color-border-base);
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: 8px;
+
+  & + & {
+    margin-top: 12px;
+  }
+`
+
+const ToolsContainer = styled(FlexCenterDiv)`
+  & > svg {
+    width: 18px;
+    height: 18px;
+  }
+`
+
+const Name = styled(FlexDiv)`
+  flex: 1;
+  align-items: center;
+  font-size: 1.25em;
+  border-radius: 6px;
+  padding: 5px 10px;
+`
+
+const UtilityButton = styled(SVGButton)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  padding: 10px;
+  background-color: white;
+
+  &[disabled] > svg {
+    color: grey;
+  }
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
+`
+
+export type TriggerProps = {
+  trigger: TriggerRecord
+  onBlur: React.FocusEventHandler<HTMLDivElement>
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement>
+}
+
+const Trigger: FC<TriggerProps> = ({ trigger, onBlur, onKeyDown }) => {
+  const navigate = useNavigate()
+  const toBuilder: React.MouseEventHandler<HTMLButtonElement> = useCallback(function (e) {
+    navigate(`/schedule/flow/${trigger.id}`)
+  }, [])
+
+  const removeTrigger: React.MouseEventHandler<HTMLButtonElement> = useCallback(
+    function (e) {
+      const { triggers, setState } = getStore().getState()
+      setState({ triggers: triggers.filter((t) => t !== trigger) })
+    },
+    [trigger]
+  )
+
+  const setEditable: React.MouseEventHandler<HTMLDivElement> = useCallback(function (e) {
+    ;(e.target as HTMLDivElement).setAttribute('contenteditable', 'true')
+    ;(e.target as HTMLDivElement).focus()
+  }, [])
+
+  const setTriggerName: React.FocusEventHandler<HTMLDivElement> = useCallback(function (e) {
+    e.target.setAttribute('contenteditable', 'false')
+    onBlur(e)
+  }, [])
+
+  const nameRef = useRef<HTMLDivElement>(null)
+
+  useEffect(function () {
+    if (!nameRef.current?.textContent) nameRef.current?.click()
+  }, [])
+
+  return (
+    <Container>
+      <Name
+        ref={nameRef}
+        suppressContentEditableWarning
+        placeholder='트리거의 이름을 입력하세요'
+        onClick={setEditable}
+        onBlur={setTriggerName}
+        onKeyDown={onKeyDown}
+        autoCorrect='false'
+      >
+        {trigger.name}
+      </Name>
+      <ToolsContainer>
+        <UtilityButton data-desc2='트리거를 정의합니다' onClick={toBuilder}>
+          <Write />
+        </UtilityButton>
+
+        <UtilityButton data-desc2='트리거를 삭제합니다' onClick={removeTrigger}>
+          <Remove3 />
+        </UtilityButton>
+      </ToolsContainer>
+    </Container>
+  )
+}
+
+export default memo(Trigger)

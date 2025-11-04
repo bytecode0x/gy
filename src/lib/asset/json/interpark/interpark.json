@@ -1,0 +1,170 @@
+[
+  {
+    "example": "11",
+    "explanation": "상품번호는 임의로 주시면 됩니다.\n입력한 내용과 상관없이 새로운\n번호로 부여됩니다.\n(압축이미지 파일을 올리실때 여기입력한 번호와 동일한번호로 이미지파일이름을 주십시요)\nex) 11번상품의 이미지: 11.jpg",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "interpark,0,r",
+    "optionName": "이미지 파일 번호"
+  },
+  {
+    "example": "카세트오디오",
+    "explanation": "",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "interpark,1,r",
+    "optionName": "상품명"
+  },
+  {
+    "example": "카세트,오디오,음향,사운드",
+    "explanation": "4개까지 입력가능\n4개입력:\nex) 카세트,오디오,음향,사운드\n3개입력:\nex) 카세트,오디오,음향\n2개입력:\nex) 카세트,오디오\n1개입력:\nex) 카세트",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "interpark,2,ir",
+    "optionName": "검색키워드"
+  },
+  {
+    "example": "01",
+    "explanation": "01 : 신상품\n02 : 중고상품\n03 : 반품상품",
+    "isRequired": "필수",
+    "literal": "01:02:03",
+    "optionCode": "interpark,3,r",
+    "optionName": "상품상태"
+  },
+  {
+    "example": "19",
+    "explanation": "숫자를 입력하지 않으면 나이제한안함. 숫자입력시 해당나이로 제한 (ex. 19 = 19세 이상으로 제한)",
+    "isRequired": "비필수",
+    "literal": "{number}",
+    "optionCode": "interpark,4,ir",
+    "optionName": "제한나이"
+  },
+  {
+    "example": "인터파크",
+    "explanation": "",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "interpark,5,ir",
+    "optionName": "제조업체명"
+  },
+  {
+    "example": "인터파크",
+    "explanation": "",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "interpark,6,ir",
+    "optionName": "브랜드명"
+  },
+  {
+    "example": "Y",
+    "explanation": "Y : 상품별 배송비설정\nN : 업체 배송비 설정\n(Y 입력시, 배송비지불유형,책정방식, 배송비, 무료배송기준수량 입력하셔야합니다.)\n미입력시 기본값N으로 입력",
+    "isRequired": "필수",
+    "literal": "Y[interpark,8,d/interpark,9,d/interpark,10,d/interpark,11,d]:N",
+    "optionCode": "interpark,7,r",
+    "optionName": "상품배송비사용여부"
+  },
+  {
+    "example": "01",
+    "explanation": "01 : 착불\n02 : 선불\n03 : 선불+착불",
+    "isRequired": "조건부 필수",
+    "literal": "01:02:03",
+    "optionCode": "interpark,8,d",
+    "optionName": "배송비지불유형"
+  },
+  {
+    "example": "01",
+    "explanation": "01 : 개당\n02 : 무조건\n03 : n개당",
+    "isRequired": "조건부 필수",
+    "literal": "01:02:03[interpark,12,d]",
+    "optionCode": "interpark,9,d",
+    "optionName": "배송비책정방식"
+  },
+  {
+    "example": "4500",
+    "explanation": "무료일 경우에는 배송비에 0을 입력",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "interpark,10,d",
+    "optionName": "배송비"
+  },
+  {
+    "example": "10",
+    "explanation": "특정개수 이상 주문시 무료배송. Ex. 10개 이상 주문시 무료배송 = 10",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "interpark,11,d",
+    "optionName": "무료배송기준수량"
+  },
+  {
+    "example": "",
+    "explanation": "특정개수 이상씩 배송비 책정. Ex. 10개 당 배송비 2500원, 20개 당 배송비 5000원",
+    "isRequired": "조건부 필수",
+    "literal": "{number}",
+    "optionCode": "interpark,12,d",
+    "optionName": "n개당배송비 주문수량"
+  },
+  {
+    "example": "한국",
+    "explanation": "ex) 한국\nex) 네덜란드\nex) 국내+국외",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "interpark,13,r",
+    "optionName": "원산지유형"
+  },
+  {
+    "example": "1000",
+    "explanation": "",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "interpark,14,r",
+    "optionName": "판매한정수량"
+  },
+  {
+    "example": "02",
+    "explanation": "01 : 과세\n02 : 면세\n03 : 영세\n04 : 유가증권 \n(입력하지않으면\n 기본으로 01 입력)              ",
+    "isRequired": "필수",
+    "literal": "01:02:03:04",
+    "optionCode": "interpark,15,r",
+    "optionName": "과면세유형"
+  },
+  {
+    "example": "8000",
+    "explanation": "****** 필수입력",
+    "isRequired": "필수",
+    "literal": "{number}",
+    "optionCode": "interpark,16,r",
+    "optionName": "판매가"
+  },
+  {
+    "example": "좋은상품11",
+    "explanation": "",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "interpark,17,ir",
+    "optionName": "특이사항"
+  },
+  {
+    "example": "좋은 상품",
+    "explanation": "",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "interpark,18,ir",
+    "optionName": "상품설명"
+  },
+  {
+    "example": "AE23456",
+    "explanation": "별도로 관리하는 상품코드가 있으시면 입력하세요.",
+    "isRequired": "비필수",
+    "literal": "{string}",
+    "optionCode": "interpark,19,ir",
+    "optionName": "판매자상품번호"
+  },
+  {
+    "example": "",
+    "explanation": "가능 - 가능한 경우 나열/ 불가능 - 불가능사유 입력",
+    "isRequired": "필수",
+    "literal": "{string}",
+    "optionCode": "interpark,20,r",
+    "optionName": "AS여부"
+  }
+]

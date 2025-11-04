@@ -1,0 +1,202 @@
+import FormComponent from 'lib/components/Form'
+import { ActionDesigner, Form } from 'lib/gy/core/type/action'
+import { EvaluateSubstitute, Parse } from 'sementic_events'
+import { ComponentProps, useCallback, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import Play from 'shared/assets/svg/Play'
+import { TableBody, TableData, TableHeader, TableRow } from 'lib/frame/generic'
+import { SVGButton } from 'lib/frame/generic'
+import { pushMessage } from 'lib/util/dom/render'
+import MatrixInput from '../../../lib/components/MatrixInput'
+import { SNAPSHOT_MAX_COL_LENGTH, SNAPSHOT_MAX_DATA_LENGTH, SNAPSHOT_MAX_ROW_LENGTH } from '../const'
+import { getEvHandler } from '../content-event-handler'
+import { safeGetBody } from '../effects'
+import { SpecificationTable } from '../frames'
+import { getPreviousSnapshots, getUpperSnapshots } from '../functions'
+import { getStore, setOverlay } from '../store'
+
+export const FORM: ActionDesigner<Form> = {
+  help: '폼(FORM)를 정의합니다',
+  template: 'FORM',
+  design({ as }) {
+    // const [options, setOptions] = useState<Form['value']['options']>(as.value?.options || {})
+
+    const designSchema = useCallback(
+      function () {
+        const { cache, setState } = getStore().getState()
+
+        const ps = cache.procedures.find((ps) => ps.tasks.flat().some((ts) => ts.actions.includes(as)))
+
+        if (!ps)
+          return pushMessage({
+            message: 'DESIGNER:DEFINE:NO_PROC_SCHEMA_MATCHED',
+            layer: safeGetBody().querySelector('#push')
+          })
+
+        const ts = ps.tasks.flat().find((ts) => ts.actions.includes(as))
+
+        if (!ts)
+          return pushMessage({
+            message: 'DESIGNER:DEFINE:NO_TASK_SCHEMA_MATCHED',
+            layer: safeGetBody().querySelector('#push')
+          })
+
+        const snapshot = getUpperSnapshots(ps, ts)
+          .concat(getPreviousSnapshots(ts, as))
+          .reduce(function (prev, curr) {
+            return Object.assign(prev, curr)
+          }, {})
+
+        console.log('form as snapshot: ', snapshot)
+
+        const revert = setOverlay(
+          <FormComponent
+            header='Define Substitutions'
+            onReject={function () {
+              revert()
+            }}
+            onResolve={async function (formData) {
+              const evHandler = getEvHandler()
+              as.value = { record: formData }
+              as.snapshot = Object.fromEntries(
+                await Promise.all(
+                  Object.entries(formData).map(([k, v]) =>
+                    Promise.all([
+                      Promise.resolve(k),
+                      evHandler
+                        .sendEvent<Parse>({
+                          name: 'PARSE',
+                          payload: { raw: v, splitWithEscaped: undefined },
+                          meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+                        })
+                        .then((data) =>
+                          data
+                            .slice(0, SNAPSHOT_MAX_ROW_LENGTH)
+                            .map((row) =>
+                              row
+                                .slice(0, SNAPSHOT_MAX_COL_LENGTH)
+                                .map((v) =>
+                                  v.length > SNAPSHOT_MAX_DATA_LENGTH
+                                    ? v.slice(0, SNAPSHOT_MAX_COL_LENGTH).concat('...')
+                                    : v
+                                )
+                            )
+                        )
+                    ])
+                  )
+                )
+              )
+              revert()
+              setState({ cache: { ...cache } })
+              // setOptions(formData)
+            }}
+            record={{
+              ...Object.fromEntries(
+                Object.entries(as?.value?.record || {}).map(([key, data]) => [
+                  key,
+                  {
+                    data,
+                    modifiable: true,
+                    modal(getter, setter, close) {
+                      /**
+                       * children inside modal already rendered before opening modal
+                       * It might be better to render on effect ?
+                       */
+                      return (
+                        <MatrixInput
+                          initial={data}
+                          onReject={close}
+                          onResolve={function (raw, matrix) {
+                            setter(raw)
+                            close()
+                          }}
+                          snapshot={snapshot}
+                          evaluate={function ({ expression, sdr }) {
+                            const evHandler = getEvHandler()
+                            return evHandler.sendEvent<EvaluateSubstitute>({
+                              name: 'EVALUATE_SUBSTITUTE',
+                              payload: { expression, sdr },
+                              meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+                            })
+                          }}
+                        />
+                      )
+                    }
+                  } as ComponentProps<typeof FormComponent>['record'][string]
+                ])
+              )
+            }}
+            designer={function () {
+              return {
+                data: '',
+                modifable: true,
+                modal(getter, setter, close) {
+                  /**
+                   * children inside modal already rendered before opening modal
+                   * It might be better to render on effect ?
+                   */
+                  return (
+                    <MatrixInput
+                      initial={getter()}
+                      onReject={close}
+                      onResolve={function (raw, matrix) {
+                        setter(raw)
+                        close()
+                      }}
+                      snapshot={snapshot}
+                      evaluate={function ({ expression, sdr }) {
+                        const evHandler = getEvHandler()
+                        return evHandler.sendEvent<EvaluateSubstitute>({
+                          name: 'EVALUATE_SUBSTITUTE',
+                          payload: { expression, sdr },
+                          meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+                        })
+                      }}
+                    />
+                  )
+                }
+              }
+            }}
+          />
+        )
+      },
+      [as]
+    )
+
+    useEffect(function init() {
+      if (as.value !== undefined) return
+      designSchema()
+    })
+    return createPortal(
+      <SVGButton
+        data-desc='수정하기'
+        // disabled={!action}
+        onClick={designSchema}
+      >
+        <Play />
+      </SVGButton>,
+      safeGetBody().querySelector('#as-util')!
+    )
+  },
+  specify({ as }) {
+    return (
+      <SpecificationTable>
+        <TableBody>
+          <TableRow>
+            {['키', '값'].map((key, index) => (
+              <TableHeader key={index}>{key}</TableHeader>
+            ))}
+          </TableRow>
+          {as.value &&
+            as.value.record &&
+            Object.entries(as.value.record).map(([key, value]) => (
+              <TableRow key={key}>
+                <TableData>{key}</TableData>
+                <TableData>{value}</TableData>
+              </TableRow>
+            ))}
+        </TableBody>
+      </SpecificationTable>
+    )
+  }
+}

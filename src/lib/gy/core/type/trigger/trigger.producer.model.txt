@@ -1,0 +1,35 @@
+import { TriggerInterfaceSuperset201, TriggerInterfaceSuperset202 } from "./trigger.interface.model"
+
+/**
+ * trigger doesn't need schema to create actual record
+ * so doesn't need desginer either
+ */
+export type TriggerProducer201<TTriggerInterface extends TriggerInterfaceSuperset201 = TriggerInterfaceSuperset201> = {
+  name: string
+  help?: string
+  template: T['template']
+  // reqKeys?: Array<keyof T['req']>
+  produce: React.FC<{
+    pd: ProcedureDescriptor
+    t: Partial<Trigger201<T>>
+    onResolve: (t: Trigger201<T>) => any
+    onReject: () => any
+  }>
+  specify: React.FC<{ t: Partial<Trigger201<T>> }>
+}
+
+export type TriggerProducer202<TTriggerInterface extends TriggerInterfaceSuperset202 = TriggerInterfaceSuperset202> = {
+  name: string
+  help?: string
+  template: T['template']
+  // reqKeys?: Array<keyof T['req']>
+  produce: React.FC<{
+    pd: ProcedureDescriptor
+    trigger: Partial<Trigger202<T>>
+    onResolve: (trigger: Trigger202<T>) => any
+    onReject: () => any
+  }>
+  specify: React.FC<{ t: Partial<Trigger202<T>> }>
+}
+
+export type TriggerProducer<T extends TriggerInterfaceSuperset = TriggerInterfaceSuperset> = TriggerProducer202<T>

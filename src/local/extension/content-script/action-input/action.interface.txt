@@ -1,0 +1,5 @@
+import { ActionDesigner, ActionPreset } from 'lib/gy/core/type/action'
+
+export type ActionDesigners = {
+  [K in ActionPreset['template']]: ActionDesigner<Extract<ActionPreset, { template: K }>>
+}

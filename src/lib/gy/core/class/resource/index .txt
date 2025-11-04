@@ -1,0 +1,76 @@
+import { EventEmitter } from 'sementic_events'
+
+/**
+ * might be better to change name into Lock
+ */
+
+type ResourceOptions<N extends string = string, V = undefined> = {
+  name: N
+  value: V
+  quota: number
+}
+
+export default class Resource<H, N extends string = string, V = undefined> extends EventEmitter {
+  id: string
+
+  name: N
+
+  value: V
+
+  quota: number
+
+  holder: Set<H>
+
+  queue: Array<H>
+
+  constructor({ value, name, quota }: ResourceOptions<N, V>) {
+    super()
+    this.name = name
+    this.quota = quota
+    this.holder = new Set()
+    this.value = value
+  }
+
+  /**
+   * you can use resource as many times as you acquire as long as you are included in holder
+   */
+  acquire(claimer: H) {
+    return new Promise<[V, () => void]>((resolve, reject) => {
+      if (this.quota > this.holder.size) this.holder.add(claimer)
+
+      const doneUsing = () => {
+        this.holder.delete(claimer)
+        const next = this.queue.shift()
+        if (next) this.holder.add(next)
+        this.emit('acquired')
+      }
+
+      if (this.holder.has(claimer)) return resolve([this.value, doneUsing])
+
+      this.queue.push(claimer)
+
+      const onAcquired = () => {
+        if (!this.holder.has(claimer)) return
+        this.off('acquired', onAcquired)
+        // this.off('abort', onAbort)
+
+        return resolve([this.value, doneUsing])
+      }
+
+      // const onAbort = (reason?: string) => {
+      //   if (!this.holder.has(claimer)) return
+      //   this.off('preempted', onPreempted)
+      //   this.off('abort', onAbort)
+      //   doneUsing()
+      //   return reject(new Error(reason || `resource acquire on ${this.name} is rejected`))
+      // }
+      // this.on('abort', onAbort)
+
+      this.on('acquired', onAcquired)
+    })
+  }
+
+  abort(holder: H, reason?: string) {
+    this.emit('abort', holder, reason)
+  }
+}

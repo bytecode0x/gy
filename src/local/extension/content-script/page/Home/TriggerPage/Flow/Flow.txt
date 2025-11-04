@@ -1,0 +1,93 @@
+import Card from 'extension/content-script/components/Atoms/Card'
+import Add from 'extension/content-script/components/Atoms/buttons/Add'
+import FlowArrow from 'extension/content-script/components/FlowArrow'
+import ProcedureSelector from 'extension/content-script/components/ProcedureSelector'
+import Specification from 'extension/content-script/components/Specification/Specification'
+import TriggerSelector from 'extension/content-script/components/TriggerSelector'
+import { getStore, setOverlay } from 'extension/content-script/store'
+import { triggerProducers } from 'extension/content-script/trigger-producers'
+import { useCallback } from 'react'
+import { useParams } from 'react-router-dom'
+import { SCROLL } from 'lib/styled-css-property'
+import { Span } from 'lib/frame/generic'
+import { FlexCenterDiv, FlexColumnDiv, FlexDiv } from 'lib/frame/generic'
+import styled from 'styled-components'
+import shallow from 'zustand/shallow'
+
+const Container = styled(FlexDiv)`
+  flex: 1;
+  // padding: 12px;
+  align-items: center;
+  // justify-content: space-evenly;
+  ${SCROLL}
+`
+
+const Flow = () => {
+  const { id } = useParams()
+  const [procedures, setState] = getStore()(
+    useCallback((state) => [state.triggers, state.procedureSchemas, state.setState], []),
+    shallow
+  )
+
+  const trigger = triggers.find((t) => t.id === id)
+  const proc = procedures.find((proc) => proc.id === trigger?.procId)
+
+  return (
+    <Container>
+      {trigger ? (
+        <Card header={trigger.name}>
+          <Specification
+            promise={triggerProducers.find((p) => p.template === trigger?.template)!.specify(trigger.value)}
+          />
+        </Card>
+      ) : (
+        <Add
+          onClick={function (e) {
+            setOverlay(
+              <TriggerSelector
+                onClick={function (_trigger) {
+                  if (!trigger) return
+                  Object.assign(trigger, _trigger)
+                  setOverlay(null)
+                  setState({ triggers: [...triggers] })
+                }}
+              />
+            )
+          }}
+        />
+      )}
+      <FlowArrow />
+      {proc ? (
+        <Card header={proc.name}>
+          {proc.tasks.map((layer, index) => (
+            <FlexColumnDiv key={index}>
+              {layer.map((task) => (
+                <FlexCenterDiv>
+                  <Span>{task.name}</Span>
+                  <Span>{task.actions.map((action) => action.name).join(', ')}</Span>
+                </FlexCenterDiv>
+              ))}
+            </FlexColumnDiv>
+          ))}
+        </Card>
+      ) : (
+        <Add
+          onClick={function (e) {
+            setOverlay(
+              <ProcedureSelector
+                onClick={function (proc) {
+                  if (!trigger) return
+                  trigger.procId = proc.id
+                  setOverlay(null)
+                  setState({ triggers: [...triggers] })
+                }}
+              />
+            )
+          }}
+        />
+      )}
+    </Container>
+  )
+}
+
+export default Flow

@@ -1,0 +1,32 @@
+html {
+  font-size: 12px;
+}
+  
+body {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  margin : 0;
+  overflow : hidden;
+}
+
+/* The :root CSS pseudo-class matches the root element of a tree representing the document. In HTML, :root represents the <html> element and is identical to the selector html, except that its specificity is higher. */
+
+:root {
+  --color-theme-primary :  #fafafa;
+}
+
+#root {
+  width : 100vw;
+  height: 100vh;
+}
+
+
+*, *::after, *::before {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;    
+}

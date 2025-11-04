@@ -1,0 +1,6 @@
+*.css
+*.svg
+*.js
+
+node_modules
+ckeditor5

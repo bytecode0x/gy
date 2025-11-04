@@ -1,0 +1,140 @@
+effect is domain-specific form of a function
+so don't handle effect in library
+
+Select, Form 같은 Generic Component 에 남아있는 의존성을
+모두 제거하고 필요한 부분은 상위 컴포넌트(HOC)에서 처리할 수 있게 해야 함
+
+앱을 만들 때 gy 를 프레임으로 쓰긴 할 거지만
+의존성은 되도록 제거해야 함
+
+의존성이 반영되는 곳은 domain, business logic 과 관계된
+추상화된 함수, 인스턴스, 컴포넌트 여야 한다
+이 과정에서 쓰이는 모든 이벤트, 하위 요소들은 되도록 의존성을 덜어내야 한다
+
+
+* session resource type specification
+
+* global type override (window eh)
+
+* store synch 문제
+
+과거의 extension store <-> main store 에서
+
+extension store <-> gy store <-> main store 로 한층 추상화 됐음
+
+ext 종료 => main store 로 저장 부분을
+
+ext 종료 => gy store 저장으로 바꿔야 함
+
+gy store 와 main store 의 상호작용은 시작과 종료일 때 불러내거나 저장하는 용도로만 쓸 것
+
+runtime 시 상호 작용은 gy store 로 해야 한다
+=> state 로 이름을 바꾸는 게 좀 더 뜻이 분명해질 듯
+
+즉 extension state <=> gy state <=> main store
+
+extension state 에만 쓰이는 state 들도 있음
+=> extension state 와 main store 가 직접 상호작용 해야할 필요성
+
+extension state <=> main store
+gy state <=> main store
+extension state <=> gy state
+
+세가지 상호작용이 전부 가능해야 한다
+
+
+
+Extension layer
+input action value
+
+Main layer
+handle action value
+=> CRUD(Create, Read, Update, Delete)
+
+designer
+=> validate value 
+
+store {
+ gy
+ ext
+}
+
+state 가 main 에 있는 것은 불변
+
+extension 이 state 를 가지고 있다가
+종료했을 때 한번에(pooling) synch 하는 것도 장점이 있음
+
+현지 action designer 의 역할이 모호함
+애초에 designer 는 input 의 역할이고
+이건 custom action 의 입력을 위해 상위 계층에서 구현할 사항
+
+action design, trigger define 은 json 형태라
+main 이 아닌 runtime 에서 실행되어도 상관이 없지만
+trigger cancel, action consume 은 반드시 main 에서 실행돼야 함
+=> 그렇다면 나중에 확장성이나 일관성을 위해서라도
+main 에서 design, define 하는 것이 좋아보임
+비효율적으로 보이지만 
+extension(send action input event1) 
+=> main(send action input event2) => extension(reply action input event2)
+=> main(reply action input event2) => extension
+이런 식으로 구현해야 한다
+event1 은 generic 한 구조적 event 의 흐름
+즉 main 을 중앙으로 두고 처리하는 시스템에 부합하는 event
+
+event2 를 보내는 부분은 sementic 한, 실질적으로
+input 을 처리하는데 쓰이는 방법으로 event 를 선택한 것 뿐
+어떻게든 event1 에 대한 reply 로 action schema 를 주기만 하면 된다
+
+send input event1 => main scope 내에서 action schema 형성 => reply input event1
+이 것이 틀이고 구체적인 방법으로 event 를 선택하는 것 뿐이라는 것
+같은 event 지만 generic, systemic, core 한 부분의 일환인지
+sementic, abstract 한 부분인지는 구분해서 인지해야 한다
+
+굳이 이렇게 구현하는 이유는 decoupling 을 위함이다
+만약 input 과정에서 main(gy) 내에서 action schema 를 주지 않고
+외부(extension)에서 처리하게 되면 의도치 않게 그 부분도 코어로 포함시키고 있는 것이다
+즉 input(designer) 는 main(gy) 에서 action schema 를 형성한다 는
+시스템적인 룰을 지켜야 독립성이 보장되는 decoupling 이 가능하다
+그리고 input 의 구현 자체는 sementic, abstract 하게 하는 것
+
+시나리오 1 create procedure
+
+1. user interactions(create procedure) => cs(send create event) => main(create an empty procedure and reply with procedure descriptor)
+2. re-render procedure item with the descriptor
+3. user interactions(define procedure) => cs(send get/read procedure) => main(read the procedure and reply with it)
+4. user interactions(define task, select action template) => cs(send design action) => main(send input action) => user interaction(input action) 
+=> cs(reply input action) => main(reply design action) => user interactions(done defining) => cs(send update procedure) 
+=> main(update procedure and reply)
+이 때 action snapshot 값을 interpret 할 때 쓰이는 edr 을 계산을 extension 에서 하고 있는데
+이 과정이 core 에 내재되어야 하는지에 대한 고민이 필요함
+
+
+시나리오 2 update procedure
+=> 시나리오 1의 3부터
+
+시나리오 3 delete procedure
+1. user interactions(delete procedure) => cs(send delete event) => main(delete procedure schema and descriptor)
+=> cs(delete descriptor from state)
+
+
+시나리오 4 set trigger
+1. user interactions(set trigger) => cs(send set event) => main(set trigger and append it to procedure descriptor)
+
+
+시나리오 5 cancel trigger
+user interactions(cancel trigger) => cs(send cancel event) => main(cancel trigger and delete it from procedure descriptor)
+
+
+
+ts-ignore 처리한 것들
+
+
+
+window.eh.sendEvent({ name: 'INTERPRET', meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }, payload: { raw: '$<json|parse|${EXTENSION_TAB}>', header: { edr: { EXTENSION_TAB: [['2107476664']] } } }  })
+
+will resolve in 2107476664
+
+window.eh.sendEvent({ name: 'INTERPRET', meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }, payload: { raw: '$<json|parse|${EXTENSION_TAB}>', header: { edr: { EXTENSION_TAB: [['$<json|parse|2107476664>']] } } }  })
+
+will also resolve in 2107476664
+

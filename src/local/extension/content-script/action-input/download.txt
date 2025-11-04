@@ -1,0 +1,219 @@
+import Form from 'lib/components/Form'
+import { ActionDesigner, Download } from 'lib/gy/core/type/action'
+import { useCallback, useEffect } from 'react'
+import { createPortal } from 'react-dom'
+import Play from 'shared/assets/svg/Play'
+import { TableBody, TableData, TableHeader, TableRow } from 'lib/frame/generic'
+import { SVGButton } from 'lib/frame/generic'
+import { pushMessage } from 'lib/util/dom/render'
+import { OpenDialog } from 'sementic_events'
+import { z } from 'zod'
+import MatrixInput from '../components/MatrixInput'
+import { getEvHandler } from '../content-event-handler'
+import { safeGetBody } from '../effects'
+import { SpecificationTable } from '../frames'
+import { getPreviousSnapshots, getUpperSnapshots } from '../functions'
+import { getStore, setOverlay } from '../store'
+
+export const DOWNLOAD: ActionDesigner<Download> = {
+  help: '주어진 url 로부터 resource 를 로컬 파일로 저장합니다',
+  template: 'DOWNLOAD',
+  design({ as }) {
+    const designSchema = useCallback(function () {
+      const { procedureSchemas, config, setState } = getStore().getState()
+
+      const ps = procedureSchemas.find((ps) => ps.tasks.flat().some((ts) => ts.actions.includes(as)))
+
+      if (!ps)
+        return pushMessage({
+          message: 'DESIGNER:DOWNLOAD:NO_PROC_SCHEMA_MATCHED',
+          layer: safeGetBody().querySelector('#push')
+        })
+
+      const ts = ps.tasks.flat().find((ts) => ts.actions.includes(as))
+
+      if (!ts)
+        return pushMessage({
+          message: 'DESIGNER:DOWNLOAD:NO_TASK_SCHEMA_MATCHED',
+          layer: safeGetBody().querySelector('#push')
+        })
+
+      const snapshot = getUpperSnapshots(ps, ts)
+        .concat(getPreviousSnapshots(ts, as))
+        .reduce(
+          function (prev, curr) {
+            return Object.assign(prev, curr)
+          },
+          { index: [['0']] }
+        )
+
+      setOverlay(
+        <Form
+          header='값을 입력하세요'
+          record={{
+            url: {
+              data: as.value?.url,
+              modal: (getter, setter, close) => (
+                <MatrixInput
+                  initial={getter()}
+                  onResolve={function (raw) {
+                    console.log('raw : ', raw)
+                    setter(raw)
+                    close()
+                  }}
+                  onReject={function (reason) {
+                    console.log(getter())
+                    close()
+                  }}
+                  snapshot={snapshot}
+                />
+              )
+            },
+            저장폴더: {
+              data: as.value?.dir,
+              help: '저장 폴더를 선택하세요',
+              effect(getter, setter) {
+                if (process.env.NODE_ENV === 'devserver') return
+                const evHandler = getEvHandler()
+                evHandler
+                  .sendEvent<OpenDialog>({
+                    name: 'OPEN_DIALOG',
+                    payload: {
+                      // defaultPath: getter(),
+                      properties: ['openDirectory', 'createDirectory'],
+                      message: '파일을 저장할 폴더를 선택하세요'
+                    },
+                    meta: { receiver: { component: 'MAIN', alias: 'MAIN' } }
+                  })
+                  .then(function (res) {
+                    if (!res.canceled) setter(res.filePaths[0])
+                  })
+              }
+            },
+            파일명: {
+              data: as.value?.base,
+              modal: (getter, setter, close) => (
+                <MatrixInput
+                  initial={getter()}
+                  onResolve={function (raw) {
+                    console.log('raw : ', raw)
+                    setter(raw)
+                    close()
+                  }}
+                  onReject={function (reason) {
+                    console.log(getter())
+                    close()
+                  }}
+                  snapshot={snapshot}
+                />
+              )
+            },
+            헤더: {
+              data: as.value?.headers,
+              modal: (getter, setter, close) => (
+                <MatrixInput
+                  initial={getter()}
+                  onResolve={function (raw, matrix) {
+                    console.log('raw : ', raw, 'matrix : ', matrix)
+                    setter(raw)
+                    close()
+                  }}
+                  onReject={function (reason) {
+                    console.log(getter())
+                    close()
+                  }}
+                  snapshot={snapshot}
+                />
+              )
+            }
+          }}
+          onResolve={function (formData) {
+            as.value = {
+              base: formData['파일명'] || '',
+              dir: formData['저장폴더'],
+              headers: formData['헤더'] || '',
+              url: formData.url
+            }
+
+            /**
+             * if you can find out what property occurs the error
+             * then you can use zod
+             */
+            const validator = z.object({
+              base: z.string().or(z.undefined()),
+              dir: z.string().nonempty(),
+              url: z.string().nonempty(),
+              header: z.string().or(z.undefined())
+            })
+
+            const parse = validator.safeParse(as.value)
+
+            if ('error' in parse)
+              return parse.error.issues.forEach(({ path, message }) =>
+                pushMessage({
+                  message: `${path[0]} : 올바른 값이 아닙니다\n${message}`,
+                  layer: safeGetBody().querySelector('#push')
+                })
+              )
+
+            setState({ procedureSchemas: procedureSchemas.slice() })
+            setOverlay(null)
+          }}
+          onReject={function () {
+            setOverlay(null)
+          }}
+          // onPreflight={async function (formData) {
+          //   const evHandler = getEvHandler()
+
+          //   const [code, text] = await evHandler.sendEvent<GetHttpStatusCode>({
+          //     name: 'GET_HTTP_STATUS_CODE',
+          //     payload: formData as Download['value'],
+          //     meta: { receiver: { alias: 'MAIN', component: 'MAIN' } }
+          //   })
+
+          //   if (code !== 200)
+          //     pushMessage({
+          //       message: `${code} : ${text}`,
+          //       layer: safeGetBody().querySelector('#push')
+          //     })
+
+          //   return code === 200
+          // }}
+        />
+      )
+    }, [])
+
+    useEffect(function init() {
+      if (as.value !== undefined) return
+
+      designSchema()
+    })
+
+    return createPortal(
+      <SVGButton
+        data-desc='수정하기'
+        // disabled={!action}
+        onClick={designSchema}
+      >
+        <Play />
+      </SVGButton>,
+      safeGetBody().querySelector('#as-util')!
+    )
+  },
+  specify({ as }) {
+    return (
+      <SpecificationTable>
+        <TableBody>
+          <TableRow>
+            {['URL', 'HEADERS', 'DIR', 'NAME'].map((key, index) => (
+              <TableHeader key={index}>{key}</TableHeader>
+            ))}
+          </TableRow>
+          <TableRow>
+            <TableData>{as.value?.url}</TableData>
+          </TableRow>
+        </TableBody>
+      </SpecificationTable>
+    )
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "manifest_version": 3,
+  "version" : "1.0.0",
+  "name": "TYPE_HERE",
+  "author" : "bytecode0x@gmail.com",
+  "description": "TYPE_HERE",
+  "permissions": [
+    "contextMenus",
+    "scripting",
+    "activeTab",
+    "tabs",
+    "storage",
+    "webNavigation",
+    "management",
+    "pageCapture",
+    "webRequest",
+    "nativeMessaging"
+  ],
+  "host_permissions": [
+    "*://*/*",
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background/index.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": ["content-script/index.js"],
+      "matches": ["https://*/*", "http://*/*"],
+      "all_frames" : false,
+      "run_at" : "document_idle",
+      "world" : "ISOLATED"
+    },
+    {
+      "js": ["content-script/main.js"],
+      "matches": ["https://*/*", "http://*/*"],
+      "all_frames" : false,
+      "run_at" : "document_start",
+      "world" : "MAIN"
+    }
+  ],
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "assets/images/round16.png",
+    "32": "assets/images/round32.png",
+    "48": "assets/images/round48.png",
+    "128": "assets/images/round128.png"
+  },
+  "action": {
+    "default_icon": {
+        "16": "assets/images/round16.png",
+        "32": "assets/images/round32.png"
+    },
+    "default_popup": "popup.html",
+    "default_title": "gy"
+  }
+}

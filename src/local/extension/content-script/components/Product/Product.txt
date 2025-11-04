@@ -1,0 +1,69 @@
+import { IpcPopupProductPage } from 'lib/ipc-event'
+import React, { useCallback } from 'react'
+import { useStore } from 'renderer/store'
+import { Remove } from 'shared/assets/svg'
+import { FlexCenterDiv, FlexColumnDiv, SVGButton, TextButton } from 'lib/frame/generic'
+import styled from 'styled-components'
+import shallow from 'zustand/shallow'
+
+const Container = styled(FlexColumnDiv)`
+  flex: 1;
+  align-items: stretch;
+  justify-content: center;
+`
+
+const ProductWrapper = styled(FlexCenterDiv)`
+  border-radius: 8px;
+  background-color: white;
+  font-size: 12px;
+  padding: 4px;
+  position: relative;
+
+  & > svg {
+    width: 20px;
+    height: 20px;
+  }
+`
+
+const RemoveButton = styled(SVGButton)`
+  position: absolute;
+  left: 4px;
+`
+const ProductLink = styled(TextButton)`
+  border-radius: 4px;
+`
+
+const Product = () => {
+  const [products, setProducts] = useStore(
+    useCallback((state) => [state.products, state.setProducts], []),
+    shallow
+  )
+
+  const popupProductPage: React.MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
+    window.eh.sendEvent<IpcPopupProductPage>(
+      'POPUP_PRODUCT_PAGE',
+      'MAIN',
+      e.currentTarget.getAttribute('data-desc2')!
+    )
+  }, [])
+
+  return (
+    <Container>
+      {products.map((product) => (
+        <ProductWrapper key={product.id}>
+          <RemoveButton>
+            <Remove />
+          </RemoveButton>
+          <ProductLink
+            onClick={process.env.NODE_ENV === 'production' ? popupProductPage : undefined}
+            data-desc2={product.url}
+          >
+            {product.name}
+          </ProductLink>
+        </ProductWrapper>
+      ))}
+    </Container>
+  )
+}
+
+export default Product

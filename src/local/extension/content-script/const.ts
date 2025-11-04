@@ -1,0 +1,5 @@
+export const SNAPSHOT_MAX_DATA_LENGTH = 100
+
+export const SNAPSHOT_MAX_ROW_LENGTH = 3
+
+export const SNAPSHOT_MAX_COL_LENGTH = 3

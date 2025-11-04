@@ -1,0 +1,9 @@
+const LessThan = () => {
+  return (
+    <svg fill='#000000' width='800px' height='800px' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'>
+      <path d='M 26 6 L 6 15.21875 L 6 16.78125 L 26 26 L 26 23.84375 L 9.46875 16 L 26 8.15625 Z' />
+    </svg>
+  )
+}
+
+export default LessThan

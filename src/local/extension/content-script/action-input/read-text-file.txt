@@ -1,0 +1,88 @@
+import { ActionDesigner, ReadTextFile } from 'lib/gy/core/type/action'
+import { useEffect } from 'react'
+import Folder2 from 'shared/assets/svg/Folder2'
+import { TableBody, TableData, TableHeader, TableRow } from 'lib/frame/generic'
+import { SVGButton } from 'lib/frame/generic'
+import { OpenDialog } from 'sementic_events'
+import OverlayForm from '../components/OverlayForm/OverlayForm'
+import { getEvHandler } from '../content-event-handler'
+import { OverlayInput, OverlayLabel, OverlayRow, SpecificationTable } from '../frames'
+import { getStore, setOverlay } from '../store'
+
+export const READ_TEXT_FILE: ActionDesigner<ReadTextFile> = {
+  help: '텍스트 파일을 읽어옵니다, 허용된 파일 용량은 최대 5mb 입니다',
+  template: 'READ_TEXT_FILE',
+  design({ as }) {
+    useEffect(function () {
+      if (as.value) return
+      new Promise<ReadTextFile['schema']>(function (resolve, reject) {
+        setOverlay(
+          <OverlayForm onResolve={resolve} onReject={reject}>
+            <OverlayRow>
+              <OverlayLabel htmlFor='filePath'>파일 경로</OverlayLabel>
+              <OverlayInput disabled id='filePath' type='text' css={{ display: 'none' }} />
+              <SVGButton
+                onClick={async function (e) {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  const evHandler = getEvHandler()
+                  const { canceled, filePaths } = await evHandler.sendEvent<OpenDialog>({
+                    name: 'OPEN_DIALOG',
+                    payload: {
+                      properties: ['openFile'],
+                      filters: [{ name: '텍스트 파일', extensions: ['txt'] }]
+                    },
+                    meta: { receiver: { alias: 'MAIN', component: 'MAIN' } }
+                  })
+                  if (canceled) return
+                  const input = e.currentTarget.previousElementSibling
+                  if (!input) return
+                  ;[(input as HTMLInputElement).value] = filePaths
+                }}
+              >
+                <Folder2 />
+              </SVGButton>
+            </OverlayRow>
+
+            <OverlayRow>
+              <OverlayLabel htmlFor='alwaysAsk'>실행할 때마다 파일 지정</OverlayLabel>
+              <OverlayInput id='alwaysAsk' type='checkbox' />
+            </OverlayRow>
+
+            <OverlayRow>
+              <OverlayLabel htmlFor='separator'>구분자</OverlayLabel>
+              <OverlayInput id='separator' type='text' />
+            </OverlayRow>
+          </OverlayForm>
+        )
+      }).then(function (value) {
+        as.value = value
+        as.snapshot = { [as.name]: [['내용 생략']] }
+        const { cache, setState } = getStore().getState()
+
+        setState({ cache: { ...cache } })
+      })
+    }, [])
+
+    return <></>
+  },
+  specify({ as }) {
+    // { 파일: filePath, 구분자: separator, '실행할 때마다 파일 지정': alwaysAsk ? '켬' : '끔' }
+
+    return (
+      <SpecificationTable>
+        <TableBody>
+          <TableRow>
+            {['파일', '구분자'].map((key, index) => (
+              <TableHeader key={index}>{key}</TableHeader>
+            ))}
+          </TableRow>
+          <TableRow>
+            <TableData>{as.value.filePath}</TableData>
+            <TableData>{as.value.separators.map((sep) => `(${sep})`).join(' ')}</TableData>
+          </TableRow>
+        </TableBody>
+      </SpecificationTable>
+    )
+  }
+}

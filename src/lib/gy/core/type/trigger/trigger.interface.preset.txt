@@ -1,0 +1,46 @@
+import { TriggerInterface201, TriggerInterface202 } from './trigger.interface'
+
+export type ContextButton201 = TriggerInterface201<
+  'CONTEXT_BUTTON',
+  { name: string; documentUrlPatterns: Array<string>; pid: string },
+  { '버튼 이름': string }
+>
+
+export type ContextButton202 = TriggerInterface202<
+  'CONTEXT_BUTTON',
+  { name: string; documentUrlPatterns: Array<string> },
+  { '버튼 이름': string }
+>
+
+export type ContextButton = ContextButton202
+
+// Date type should be changed in
+export type DateTime201 = TriggerInterface201<
+  'DATE_TIME',
+  {
+    rrule: string
+  },
+  { '반복 주기'?: string; '예정 시간'?: string }
+>
+
+export type DateTime202 = TriggerInterface202<
+  'DATE_TIME',
+  {
+    $rrule: string
+  },
+  { '반복 주기'?: string; '예정 시간'?: string }
+>
+
+export type DateTime = DateTime202
+
+export type TrayButton201 = TriggerInterface201<'TRAY_BUTTON', { name: string }, { '버튼 이름': string }>
+
+export type TrayButton202 = TriggerInterface202<'TRAY_BUTTON', { name: string }, { '버튼 이름': string }>
+
+export type TrayButton = TrayButton202
+
+export type WebPage201 = TriggerInterface201<'WEB_PAGE', { matches: Array<string> }, { Urls: string }>
+
+export type WebPage = WebPage201
+
+export type TriggerPreset = ContextButton | DateTime | TrayButton | WebPage201
