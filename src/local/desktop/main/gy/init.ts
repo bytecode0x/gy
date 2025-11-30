@@ -7,6 +7,7 @@ import { ResourceProxy } from 'lib/gy/core/class/resource-proxy'
 import { Action } from 'lib/gy/core/type/action'
 import { DataRecord, Matrix } from 'lib/gy/core/type/primitive'
 import { ConsoleLog, CreateTab, RemoveTab } from 'sementic_events'
+import { APP_ALIAS } from 'specifications'
 import stream from 'stream'
 import { v4 } from 'uuid'
 import { appStore } from '../app-store'
@@ -193,7 +194,7 @@ export function initGy() {
     async onProcedureCompleted({ $, tree }) {
       // const eh = getEvHandler()
 
-      new Notification({ title: 'Gy', body: `Procedure ${$.name} is completed` }).show()
+      new Notification({ title: APP_ALIAS, body: `Procedure ${$.name} is completed` }).show()
 
       // return eh.sendEvent<ConsoleLog>({
       //   name: 'CONSOLE_LOG',
@@ -203,7 +204,7 @@ export function initGy() {
     },
 
     async onProcedureFailed({ $, err }) {
-      new Notification({ title: 'Gy', body: `Procedure ${$.name} is failed` }).show()
+      new Notification({ title: APP_ALIAS, body: `Procedure ${$.name} is failed` }).show()
       logger.error(`Procedure ${$.name} is failed`, {
         source: 'gy',
         message: err.message,
@@ -213,11 +214,11 @@ export function initGy() {
     },
 
     async onEffectResolved({ $, scriptValues }) {
-      new Notification({ title: 'Gy', body: `Effect on ${$.name} is resolved` }).show()
+      new Notification({ title: APP_ALIAS, body: `Effect on ${$.name} is resolved` }).show()
     },
 
     async onEffectFailed({ $, err }) {
-      new Notification({ title: 'Gy', body: `Script ${$.name} is failed` }).show()
+      new Notification({ title: APP_ALIAS, body: `Script ${$.name} is failed` }).show()
 
       logger.error(`script ${$.name} is failed`, {
         source: 'gy',

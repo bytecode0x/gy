@@ -174,7 +174,7 @@ const Header = styled(Span)`
 const ContentLayout = styled(FlexDiv)`
   flex: 1;
   min-height: 0;
-  moin-width: 0;
+  min-width: 0;
 `
 
 const OptionsLayout = styled(FlexColumnDiv)<{ mode: 'list' | 'gallery' }>`

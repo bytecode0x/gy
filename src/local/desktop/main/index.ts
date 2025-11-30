@@ -1,5 +1,5 @@
 import { config as dotenv } from 'dotenv'
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, session } from 'electron'
 import path from 'path'
 import { Ping, SetConnectionStatus, UnmountApp } from 'sementic_events'
 import { APP_NAME } from 'specifications'
@@ -64,6 +64,13 @@ app.on('ready', async function () {
   initEvHandler()
   const eh = getEvHandler()
   eh.addInterface('RENDERER', initMainToRendererEventInterface(eh))
+
+  session.defaultSession.webRequest.onBeforeSendHeaders(function (details, cb) {
+    details.requestHeaders['User-Agent'] =
+      'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36'
+
+    cb({ requestHeaders: details.requestHeaders })
+  })
 
   initializeSocketSever().then(function () {
     const socketServer = getSocketServer()

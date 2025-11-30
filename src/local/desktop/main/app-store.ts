@@ -14,7 +14,8 @@ export const appStore = new Store<AppStore>({
       $gdr: {},
       gdr: {},
       gs: {},
-      $trees: []
+      $trees: [],
+      procedures: []
     },
     config: {
       alwaysOntop: false,

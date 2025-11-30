@@ -1,4 +1,5 @@
 import Logger from 'lib/component/Logger'
+import Slider from 'lib/component/Slider'
 import StatusBox from 'lib/component/StatusBox'
 import { FlexColumnDiv, FlexDiv } from 'lib/frame/generic/molecule'
 import { useEffect } from 'react'
@@ -72,12 +73,27 @@ const RootPage = () => {
   return (
     <Container>
       <StatusLayout>
-        <PseudoStatusContainer>
-          <StatusBox status='pending' />
-          <StatusBox status='halted' />
-          <StatusBox status='processing' />
-          <StatusBox status='resolved' />
-        </PseudoStatusContainer>
+        <Slider
+          width='100%'
+          height='100%'
+          animation
+          direction='horizontal'
+          circular
+          control={function (reset, next) {
+            Object.assign(window, { reset, next })
+          }}
+        >
+          <PseudoStatusContainer>
+            <StatusBox status='pending' />
+            <StatusBox status='halted' />
+            <StatusBox status='processing' />
+            <StatusBox status='resolved' />
+          </PseudoStatusContainer>
+
+          <FlexDiv>2</FlexDiv>
+
+          <FlexDiv>3</FlexDiv>
+        </Slider>
       </StatusLayout>
       <LoggerLayout>
         <Logger />

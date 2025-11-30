@@ -93,7 +93,10 @@ export function registerGyCommonEventListeners() {
         ? gy.state.$trees.filter(($t) => payload.$trees?.every((_) => _.tid !== $t.tid)).concat(payload.$trees)
         : gy.state.$trees,
       gdr: { ...gy.state.gdr, ...payload.gdr },
-      gs: { ...gy.state.gs, ...payload.gs }
+      gs: { ...gy.state.gs, ...payload.gs },
+      procedures: payload.procedures
+        ? gy.state.procedures.filter((p) => payload.procedures?.every((_) => _.id !== p.id)).concat(payload.procedures)
+        : gy.state.procedures
     }
 
     appStore.set('gy', gy.state)
@@ -236,7 +239,7 @@ export function registerGyCommonEventListeners() {
       /**
        * should edr from header and edr from cache be aggregated?
        */
-      edr: header && 'edrKey' in header && getCacheItem({ key: header.edrKey }),
+      edr: { ...header?.edr, ...(header && 'edrKey' in header && getCacheItem({ key: header.edrKey })) },
       ...header
       // this can invoke difference in the result
       // , tabId: 'id' in sender && sender.id

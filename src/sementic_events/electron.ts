@@ -113,6 +113,8 @@ export type GetStore<S extends {} = {}> = EventMatrix<
   S
 >
 
+export type __Electron__LoadUrl = EventMatrix<'LOAD_URL', ComponentUnion, 'MAIN', { url: string; rendererId: number }>
+
 export type FocusWindow = EventMatrix<'FOCUS_WINDOW', 'RENDERER', 'MAIN'>
 
 export type CloseWindow = EventMatrix<'CLOSE_WINDOW', 'RENDERER', 'MAIN'>

@@ -518,7 +518,7 @@ export const consumer: ActionConsumer<ActionPreset> = {
     const action = t || {
       ...$,
       value: {
-        ...(await interpretObj({ params: $.value.params, rendererId: $.value.rendererId }, { edr })),
+        ...(await interpretObj($.value, { edr })),
         code: $.value.code
       }
     }
@@ -544,7 +544,10 @@ export const consumer: ActionConsumer<ActionPreset> = {
         if (rendererId === 0) {
           evaluated = await runScript({
             code,
-            params: params ? Object.fromEntries(params.map((p) => [p.id, p.value])) : {}
+            params: Object.assign(
+              Object.assign(params ? Object.fromEntries(params.map((p) => [p.id, p.value])) : {}, edr),
+              { neo, edward }
+            )
           })
 
           break

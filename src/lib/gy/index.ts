@@ -108,6 +108,7 @@ export class Gatsby<
     $scripts: Array<ScriptDescriptor>
     $trees: Array<TreeDescriptor>
     $gdr: RawDataRecord
+    procedures: Array<ProcedureSchema>
     gdr: DataRecord
     gs: Record<string, boolean>
     // version: string
@@ -328,7 +329,7 @@ export class Gatsby<
       // procedure,
       // consumer,
       // tab,
-      gdr,
+      // gdr,
       config = {},
       resources,
       idr = {},
@@ -339,7 +340,7 @@ export class Gatsby<
       pid: string
       // procedure: { schema: ProcedureSchema; descriptor: ProcedureDescriptor<TTriggerPreset> }
       config?: Partial<ProcedureDescriptor['config']>
-      gdr?: DataRecord
+      // gdr?: DataRecord
       idr?: DataRecord
       resources?: Partial<{
         [Template in TResourcePreset['template']]: Array<Extract<TResourcePreset, { template: Template }>['value']>
@@ -356,7 +357,7 @@ export class Gatsby<
 
     descriptor.config = { ...descriptor.config, ...config }
 
-    const schema = this.readProcedureSchema({ pid })
+    const schema = this.state.procedures.find((p) => p.id === pid) || this.readProcedureSchema({ pid })
 
     if (!schema) throw new Error('GY_INITIATE:NO_PROCEDURE_SCHEMA_FOUND')
 
@@ -366,7 +367,7 @@ export class Gatsby<
       ps: schema,
       pd: descriptor,
       idr: {
-        ...gdr,
+        ...this.state.gdr,
         ...schema.idr,
         ...idr,
         ...this.generateDynamicIdr()

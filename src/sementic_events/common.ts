@@ -2,6 +2,12 @@ import { EventMatrix, SuperEvent } from 'lib/event/type/event'
 import { SendingMessage } from 'lib/event/type/message'
 import { ComponentUnion } from 'type/app'
 
+export type GetCache = EventMatrix<'GET_CACHE', ComponentUnion, 'MAIN', undefined, Object>
+
+export type GetCacheItem = EventMatrix<'GET_CACHE_ITEM', ComponentUnion, 'MAIN', { key: string }, any>
+
+export type SetCacheItem = EventMatrix<'SET_CACHE_ITEM', ComponentUnion, 'MAIN', { key: string; value: any }>
+
 export type Log = EventMatrix<'LOG', ComponentUnion, ComponentUnion, string>
 
 export type Echo = EventMatrix<'ECHO', ComponentUnion, ComponentUnion, string, string>
