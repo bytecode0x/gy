@@ -2,22 +2,24 @@ import ArrowLeft from 'lib/asset/svg/ArrowLeft'
 import ArrowRight2 from 'lib/asset/svg/ArrowRight2'
 import Square from 'lib/asset/svg/Square'
 import { FlexCenterDiv, FlexColumnDiv, FlexDiv, SVGButton } from 'lib/frame/generic/molecule'
+import { EllipticalLabel } from 'lib/frame/sementic'
 import { useCallback, useEffect } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { MaximizeWindow, RendererReady } from 'sementic_events'
+import { GetState, MaximizeWindow, RendererReady, SetStore } from 'sementic_events'
 import styled, { createGlobalStyle, keyframes } from 'styled-components'
+import { AppStore } from 'type'
 import shallow from 'zustand/shallow'
 import CloseWindow from './component/CloseWindow'
 import Navigation from './component/Navigation'
 import { getDocument } from './function/document'
 import ConfigPage from './page/ConfigPage'
 import RootPage from './page/RootPage'
-import { getStore } from './store'
+import { getStore, UserState } from './store'
 import './user.css'
 
 const App = () => {
-  const [setState] = getStore()(
-    useCallback((state) => [state.setState], []),
+  const [persistent] = getStore()(
+    useCallback((state) => [state.persistent], []),
     shallow
   )
 
@@ -43,7 +45,7 @@ const App = () => {
       (e.target as HTMLElement).getAttribute('data-desc')?.trim() ||
       (e.target as HTMLElement).getAttribute('data-desc2')?.trim()
     if (!desc) return
-    const footer = getDocument().querySelector('#footer') as HTMLDivElement
+    const footer = getDocument().querySelector('#desc') as HTMLDivElement
     if (footer) footer.innerText = desc
     const cleanup = () => {
       footer.innerText = ''
@@ -60,6 +62,26 @@ const App = () => {
     })
 
     getDocument().addEventListener('mouseover', showDescOnHover)
+  }, [])
+
+  useEffect(
+    function store() {
+      window.eh.sendEvent<SetStore<AppStore>>({
+        name: 'SET_STORE',
+        meta: { receiver: { component: 'MAIN', alias: 'MAIN' } },
+        payload: persistent
+      })
+    },
+    [persistent]
+  )
+
+  useEffect(function () {
+    window.eh.onEvent<GetState<UserState>>('GET_STATE', function ({ name, payload, meta }) {
+      // should It be able to refer to deep-partially ?
+      const state = getStore().getState()
+
+      return payload.reduce((a, b) => Object.assign(a, { [b]: state[b] }), {} as UserState)
+    })
   }, [])
 
   return (
@@ -96,7 +118,10 @@ const App = () => {
             <Route path='/config' element={<ConfigPage />} />
           </Routes>
         </Middle>
-        <Bottom id='footer'>Bottom</Bottom>
+        <Bottom id='footer'>
+          <StatusDisplay id='status' />
+          <Description id='desc' />
+        </Bottom>
       </ContentLayout>
       <PushMessageContainer id='push'>push</PushMessageContainer>
     </Container>
@@ -174,6 +199,24 @@ const Bottom = styled(FlexDiv)`
   background-color: var(--color-theme-primary);R
   font-size: 14px;
   padding: 0 0.5em;
+`
+
+const Description = styled(EllipticalLabel)`
+  &::before {
+    content: attr(data-head);
+    margin-left: 2px;
+    font-size: 10px;
+  }
+
+  &::after {
+    content: attr(data-tail);
+    margin-left: 2px;
+    font-size: 10px;
+  }
+`
+
+const StatusDisplay = styled(FlexDiv)`
+  width: 100px;
 `
 
 const PushMessageContainer = styled(FlexColumnDiv)`

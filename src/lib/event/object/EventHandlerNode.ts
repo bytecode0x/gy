@@ -250,7 +250,7 @@ export class EventHandlerNode<
         returnValue = await cb(unpacked)
         err = undefined
       } catch (_: any) {
-        if (_ instanceof NoReply) return Promise.resolve()
+        if (_ instanceof NoReply || _.name === 'no_reply') return Promise.resolve()
         console.error(_)
         err = `${_.toString()}\n${_.stack}` || `error`
       }

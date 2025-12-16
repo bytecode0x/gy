@@ -65,6 +65,22 @@ export type Dialog =
       }
     >
 
+export type SetFlag = EventMatrix<'SET_FLAG', ComponentUnion, 'RENDERER', { id: string; value: boolean | undefined }>
+
+export type GetFlag = EventMatrix<
+  'GET_FLAG',
+  ComponentUnion,
+  'RENDERER',
+  { id: string },
+  { value: boolean | undefined }
+>
+
+export type ConsoleLog = EventMatrix<'CONSOLE_LOG', ComponentUnion, ComponentUnion, Object>
+
+export type HideApp = EventMatrix<'HIDE_APP', ComponentUnion, ComponentUnion>
+
+export type ShowApp = EventMatrix<'SHOW_APP', ComponentUnion, ComponentUnion>
+
 export type GetBook = EventMatrix<
   'GET_BOOK',
   ComponentUnion,

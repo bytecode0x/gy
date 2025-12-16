@@ -38,7 +38,7 @@ import { NoReply } from 'lib/event/error'
 import { SuperEvent, SuperEventMatrix } from 'lib/event/type/event'
 import { runScript } from 'lib/gy/core/function'
 import { AliasUnion, AppStore, ComponentUnion } from 'type/app'
-import { addCacheItem, getCache, getCacheItem } from '../cache'
+import { getCache } from '../cache'
 import { getEvHandler } from '../infra/event/event-handler'
 import { logger } from '../infra/logger'
 import { getCalendar } from '../scheduler'
@@ -58,15 +58,26 @@ export async function registerCommonIpcEventListenrs() {
     return getCache()
   })
 
-  eh.onEvent<GetCacheItem>('GET_CACHE_ITEM', function ({ name, payload: { key }, meta }) {
-    return getCacheItem({ key })
+  eh.onEvent<GetCacheItem>('GET_CACHE_ITEM', function ({ name, payload: { keySequence }, meta }) {
+    if (!keySequence.length) return
+
+    return keySequence.reduce((a, b) => a[b], getCache())
   })
 
-  eh.onEvent<SetCacheItem>('SET_CACHE_ITEM', function ({ name, payload: { key, value }, meta }) {
-    return addCacheItem({ key, value })
+  eh.onEvent<SetCacheItem>('SET_CACHE_ITEM', function ({ name, payload: { keySequence, value }, meta }) {
+    if (!keySequence.length) return
+
+    const key = keySequence.pop()
+
+    if (!key) return
+
+    Object.assign(
+      keySequence.reduce((a, b) => a[b], getCache()),
+      { [key]: value }
+    )
   })
 
-  eh.onEvent<Eval>('EVAL', function ({ name, payload: { code, params }, meta }) {
+  eh.onEvent<Eval>('EVAL', function ({ name, payload: { code, params = {} } }) {
     return runScript({ code, params })
   })
 

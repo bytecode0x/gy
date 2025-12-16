@@ -4,21 +4,20 @@ import { ComponentUnion } from 'type/app'
 
 export type GetCache = EventMatrix<'GET_CACHE', ComponentUnion, 'MAIN', undefined, Object>
 
-export type GetCacheItem = EventMatrix<'GET_CACHE_ITEM', ComponentUnion, 'MAIN', { key: string }, any>
+export type GetCacheItem = EventMatrix<'GET_CACHE_ITEM', ComponentUnion, 'MAIN', { keySequence: Array<string> }, any>
 
-export type SetCacheItem = EventMatrix<'SET_CACHE_ITEM', ComponentUnion, 'MAIN', { key: string; value: any }>
+export type SetCacheItem = EventMatrix<
+  'SET_CACHE_ITEM',
+  ComponentUnion,
+  'MAIN',
+  { keySequence: Array<string>; value: any }
+>
 
 export type Log = EventMatrix<'LOG', ComponentUnion, ComponentUnion, string>
 
 export type Echo = EventMatrix<'ECHO', ComponentUnion, ComponentUnion, string, string>
 
-export type ConsoleLog = EventMatrix<'CONSOLE_LOG', ComponentUnion, ComponentUnion, Object>
-
 export type Ping = EventMatrix<'PING', ComponentUnion, ComponentUnion>
-
-export type HideApp = EventMatrix<'HIDE_APP', ComponentUnion, ComponentUnion>
-
-export type ShowApp = EventMatrix<'SHOW_APP', ComponentUnion, ComponentUnion>
 
 export type Pipe<TEvent extends SuperEvent<ComponentUnion, ComponentUnion>> = EventMatrix<
   'PIPE',
@@ -57,13 +56,15 @@ export type Fulfill<T = any> = EventMatrix<'FULFILL', ComponentUnion, ComponentU
 
 // export type Expect<T = any> = EventMatrix<'EXPECT', ComponentUnion, ComponentUnion, { channel: string }, T>
 
-export type Eval = EventMatrix<
-  'EVAL',
-  ComponentUnion,
-  ComponentUnion,
-  { code: string; params: Array<{ id: string; value: any }>; meta: { edrKey: string } },
-  any
->
+export type Eval =
+  | EventMatrix<
+      'EVAL',
+      ComponentUnion,
+      Exclude<ComponentUnion, 'MAIN'>,
+      { code: string; params?: Record<string, any>; meta?: { cacheKey: string } },
+      any
+    >
+  | EventMatrix<'EVAL', ComponentUnion, 'MAIN', { code: string; params?: Record<string, any> }, any>
 
 export type WriteFile = EventMatrix<
   'WRITE_FILE',

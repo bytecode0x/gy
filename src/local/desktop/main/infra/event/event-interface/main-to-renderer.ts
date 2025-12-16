@@ -45,7 +45,9 @@ export function initMainToRendererEventInterface(
 
     init() {
       ipcMain.on('__EVENT__', (e, message: SuperCoreLayerMessage) => {
-        Object.assign(message.meta, { native: { ipcMainEvent: e } } as RendererToMainMeta)
+        if (message.meta.receiver.component === 'MAIN')
+          Object.assign(message.meta, { native: { ipcMainEvent: e } } as RendererToMainMeta)
+
         eh.signal(message)
       })
     }

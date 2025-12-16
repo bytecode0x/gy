@@ -98,6 +98,7 @@
     "import/no-dynamic-require" : "off",
     "global-require" : "off",
     "no-dupe-class-members": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "guard-for-in": "off"
   }
 }

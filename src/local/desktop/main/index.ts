@@ -50,7 +50,13 @@ if (!isFirstInstance) {
   app.on('second-instance', (e, argv) => {
     if (isFirstInstance && process.platform === 'win32') {
       logger.info('second-instace from custom protocol', { source: 'main', argv })
-      const url = argv.find((arg) => arg.startsWith('TYPE_HERE://'))
+      const url = argv.find((arg) => arg.startsWith(`${APP_NAME}://`))
+
+      if (!url) return
+
+      const eh = getEvHandler()
+
+      Array.from(new URL(url).searchParams.entries()).forEach(([channel, value]) => eh.fulfill(channel, value))
     }
   })
 }
