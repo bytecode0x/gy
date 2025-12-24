@@ -1,3 +1,4 @@
+import { DeepPartial } from 'lib/util/common';
 import { AliasUnion, ComponentUnion } from 'type/app';
 import { EventMatrix } from '../lib/event/type';
 
@@ -96,11 +97,12 @@ export type SetBook = EventMatrix<
   Partial<{ [K in AliasUnion]: { component: ComponentUnion; id: string | number } }>
 >
 
-export type SetState<S extends Record<string, any> = Record<string, any>, K extends keyof S = keyof S> =
+export type SetState<S extends Record<string, any> = Record<string, any>> =
   /**
    * type constraints on key and value prevent accessing on nested object
    */
-  | EventMatrix<'SET_STATE', ComponentUnion, 'MAIN', Array<{ key: string; value: any }>>
+  // | EventMatrix<'SET_STATE', ComponentUnion, 'MAIN', Array<{ key: string; value: any }>>
+  | EventMatrix<'SET_STATE', ComponentUnion, 'MAIN', DeepPartial<S>>
   | EventMatrix<'SET_STATE', ComponentUnion, 'RENDERER' | 'CONTENT_SCRIPT', Partial<S>>
 
 export type GetState<S extends Record<string, any> = Record<string, any>, T extends keyof S = keyof S> =

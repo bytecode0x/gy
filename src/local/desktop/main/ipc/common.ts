@@ -37,6 +37,7 @@ import fs from 'fs'
 import { NoReply } from 'lib/event/error'
 import { SuperEvent, SuperEventMatrix } from 'lib/event/type/event'
 import { runScript } from 'lib/gy/core/function'
+import { deepMerge } from 'lib/util/common'
 import { AliasUnion, AppStore, ComponentUnion } from 'type/app'
 import { getCache } from '../cache'
 import { getEvHandler } from '../infra/event/event-handler'
@@ -131,9 +132,7 @@ export async function registerCommonIpcEventListenrs() {
   })
 
   eh.onEvent<SetState>('SET_STATE', function ({ name, payload, meta }) {
-    payload.forEach(function ({ key, value }) {
-      appStore.set(key, value)
-    })
+    appStore.set(deepMerge(appStore.store, payload))
   })
 
   eh.onEvent<GetState>('GET_STATE', function ({ name, payload, meta }) {

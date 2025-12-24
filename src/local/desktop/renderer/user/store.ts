@@ -1,3 +1,4 @@
+import { deepMerge, DeepPartial } from 'lib/util/common'
 import { AppStore } from 'type/app'
 import create, { StoreApi, UseBoundStore } from 'zustand'
 /**
@@ -11,10 +12,6 @@ type PersistentState = AppStore
 export type UserState = {
   session: SessionState
   persistent: PersistentState
-}
-
-type DeepPartial<T> = {
-  [K in keyof T]?: T[K] extends Record<string, any> ? DeepPartial<T[K]> : T[K]
 }
 
 type Setter = {
@@ -37,22 +34,4 @@ export function initStore(persistent: PersistentState) {
 
 export function getStore() {
   return store
-}
-
-// unmutational deep merge
-function deepMerge<T>(base: T, patch: DeepPartial<T>): T {
-  const result = { ...base }
-
-  for (const key in patch) {
-    const value = patch[key]
-
-    if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
-      const baseValue = (base as any)[key] ?? {}
-      result[key] = deepMerge(baseValue, value as any)
-    } else {
-      ;(result as any)[key] = value
-    }
-  }
-
-  return result
 }
