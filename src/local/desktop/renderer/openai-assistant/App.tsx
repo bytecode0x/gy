@@ -1,16 +1,17 @@
 import Loader from 'lib/asset/svg/Loader'
+import { CloseWindow, Fulfill, InitializeProcess, OpenDialog, RendererReady, WriteFile } from 'lib/event/sementic'
 import {
-  Div,
-  FlexCenterDiv,
-  FlexColumnCenterDiv,
-  FlexColumnDiv,
-  FlexDiv,
-  Form,
-  Input,
-  Label,
-  Span,
-  TextArea,
-  TextButton
+    Div,
+    FlexCenterDiv,
+    FlexColumnCenterDiv,
+    FlexColumnDiv,
+    FlexDiv,
+    Form,
+    Input,
+    Label,
+    Span,
+    TextArea,
+    TextButton
 } from 'lib/frame/generic'
 import { Border, TextButtonsLayout1 } from 'lib/frame/sementic'
 import { SCROLL } from 'lib/styled-css-property'
@@ -20,7 +21,6 @@ import OpenAI from 'openai'
 import { RunCreateParamsBase } from 'openai/resources/beta/threads/runs/runs'
 import { Thread } from 'openai/resources/beta/threads/threads'
 import { useEffect, useRef, useState } from 'react'
-import { CloseWindow, Fulfill, InitializeProcess, OpenDialog, RendererReady, WriteFile } from 'sementic_events'
 import styled from 'styled-components'
 
 const AssistantApp = () => {

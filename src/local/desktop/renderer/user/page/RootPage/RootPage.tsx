@@ -1,9 +1,9 @@
 import Logger from 'lib/component/Logger'
 import Slider from 'lib/component/Slider'
 import StatusBox from 'lib/component/StatusBox'
+import { Log, Pipe } from 'lib/event/sementic'
 import { FlexColumnDiv, FlexDiv } from 'lib/frame/generic/molecule'
 import { useEffect } from 'react'
-import { Log, Pipe } from 'sementic_events'
 import styled from 'styled-components'
 
 const Container = styled(FlexColumnDiv)`

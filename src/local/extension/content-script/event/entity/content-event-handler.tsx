@@ -1,15 +1,6 @@
 import Select from 'lib/component/Select'
+import { SuperEvent, SuperEventMatrix } from 'lib/event/interface'
 import { EventHandlerJS } from 'lib/event/object'
-import { SuperEvent, SuperEventMatrix } from 'lib/event/type'
-import { onLoading } from 'lib/util/dom/common'
-import {
-  __Action__Click,
-  __Action__Scrape,
-  __Action__Select,
-  ActionPreset
-} from 'local/desktop/main/gy/type/action.preset'
-import { hideApp, mountApp, showApp, unmountApp } from 'local/extension/content-script/functions/app'
-import { createRoot } from 'react-dom/client'
 import {
   ConsoleLog,
   Echo,
@@ -21,8 +12,18 @@ import {
   ShowApp,
   Subcontract,
   UnmountApp
-} from 'sementic_events'
-import { AliasUnion, BackgroundToContentScriptMeta, ComponentUnion, ExtensionStore } from 'type/'
+} from 'lib/event/sementic'
+import { AliasUnion, BackgroundToContentScriptMeta, ComponentUnion } from 'lib/event/type'
+import { onLoading } from 'lib/util/dom/common'
+import {
+  __Action__Click,
+  __Action__Scrape,
+  __Action__Select,
+  ActionPreset
+} from 'local/desktop/main/gy/type/action.preset'
+import { hideApp, mountApp, showApp, unmountApp } from 'local/extension/content-script/functions/app'
+import { createRoot } from 'react-dom/client'
+import { ExtensionStore } from 'type'
 import { v4 } from 'uuid'
 import { getStore } from '../../store'
 import { structurize } from '../../subcontractor/scrape'

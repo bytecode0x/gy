@@ -1,4 +1,4 @@
-import { SuperCoreLayerMessage } from '../type/message'
+import { SuperCoreLayerMessage } from '../interface/message'
 
 export type EventInterfaceOptions<TSender extends string, TReceiver extends string, TMeta extends {} = {}> = {
   from: TSender

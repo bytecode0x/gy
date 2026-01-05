@@ -1,3 +1,4 @@
+import { CancelTrigger, SetTrigger } from 'lib/event/sementic'
 import { FlexColumnDiv, FlexDiv, TextButton } from 'lib/frame/generic'
 import { ElevatedButton, TextButtonsLayout1 } from 'lib/frame/sementic'
 import { ProcedureDescriptor } from 'lib/gy/core/type/procedure'
@@ -10,7 +11,6 @@ import { getEvHandler } from 'local/extension/content-script/event/entity/conten
 import { safeGetBody } from 'local/extension/content-script/functions/app'
 import { getStore, setOverlay } from 'local/extension/content-script/store'
 import React, { FC, useCallback, useEffect, useState } from 'react'
-import { CancelTrigger, SetTrigger } from 'sementic_events'
 import styled from 'styled-components'
 import { v4 } from 'uuid'
 

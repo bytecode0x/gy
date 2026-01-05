@@ -1,3 +1,4 @@
-export * from './event'
-export * from './instance'
-export * from './message'
+export * from './alias'
+export * from './component'
+export * from './meta'
+

@@ -1,7 +1,7 @@
 import { v4 } from 'uuid'
 import { NoReply } from '../error/NoReply'
-import { EventMatrix } from '../type/event'
-import { ReceivingMessageMatrix, SendingMessage, SuperCoreLayerMessage, SuperReceivingMessage } from '../type/message'
+import { EventMatrix } from '../interface/event'
+import { ReceivingMessageMatrix, SendingMessage, SuperCoreLayerMessage, SuperReceivingMessage } from '../interface/message'
 import CustomEvent from './CustomEvent'
 import { EventInterface } from './EventInferface'
 

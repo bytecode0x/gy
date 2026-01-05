@@ -1,9 +1,9 @@
 import * as fabric from 'fabric'
+import { Dialog } from 'lib/event/sementic'
 import { Button, Canvas, Div, FlexCenterDiv, FlexColumnDiv, FlexDiv, Input, Span, TextButton } from 'lib/frame/generic'
 import { TextButtonsLayout1 } from 'lib/frame/sementic'
 import { SCROLL } from 'lib/styled-css-property'
 import { FC, useCallback, useEffect, useRef } from 'react'
-import { Dialog } from 'sementic_events'
 import styled, { keyframes } from 'styled-components'
 
 type ImageEditorProps = {

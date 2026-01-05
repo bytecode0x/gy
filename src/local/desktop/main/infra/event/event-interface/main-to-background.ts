@@ -1,6 +1,6 @@
+import { SuperCoreLayerMessage } from 'lib/event/interface/message'
 import { EventHandlerNode, EventInterface } from 'lib/event/object'
-import { SuperCoreLayerMessage } from 'lib/event/type/message'
-import { AliasUnion, ComponentUnion } from 'type'
+import { AliasUnion, ComponentUnion } from 'lib/event/type'
 import { v4 } from 'uuid'
 import { getExtensionSocket } from '../../socket-server'
 

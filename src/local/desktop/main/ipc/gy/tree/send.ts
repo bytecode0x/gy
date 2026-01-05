@@ -1,6 +1,6 @@
+import { FetchTree, PostTree, QueryTreeAll } from 'lib/event/sementic'
 import { DataTree } from 'lib/gy/core/type/tree'
 import { getEvHandler } from 'local/desktop/main/infra/event/event-handler'
-import { FetchTree, PostTree, QueryTreeAll } from 'sementic_events'
 
 /**
  * in context of tree

@@ -1,4 +1,4 @@
-import { EventMatrix } from 'lib/event/type'
+import { EventMatrix } from 'lib/event/interface'
 import type { DataNode } from 'lib/gy/core/class/data-node'
 import { SerializedDataTree, TreeDescriptor, TreeFindOptions } from 'lib/gy/core/type/tree'
 import { ComponentUnion } from 'type/app'

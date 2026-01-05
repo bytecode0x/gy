@@ -1,4 +1,4 @@
-import { BackgroundReady } from 'sementic_events'
+import { BackgroundReady } from 'lib/event/sementic'
 import { getEvHandler, initEventHandler } from './event/entity/background-event-handler'
 import { initBackgroundToMainEventInterface } from './event/interfaces'
 import { initSocketClient } from './infra/socket-client'

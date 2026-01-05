@@ -1,17 +1,17 @@
 import { Notification } from 'electron'
+import {
+    CopyScript,
+    CreateScript,
+    GetScript,
+    InvokeEffect,
+    RemoveScripts,
+    UpdateScript,
+    UpdateScriptDescriptor
+} from 'lib/event/sementic'
 import { DataNode } from 'lib/gy/core/class/data-node'
 import { getGy } from 'local/desktop/main/gy/init'
 import { getEvHandler } from 'local/desktop/main/infra/event/event-handler'
 import path from 'path'
-import {
-  CopyScript,
-  CreateScript,
-  GetScript,
-  InvokeEffect,
-  RemoveScripts,
-  UpdateScript,
-  UpdateScriptDescriptor
-} from 'sementic_events'
 import { fetchTree } from '../tree'
 
 export function registerGyScriptEventListeners() {

@@ -1,7 +1,7 @@
+import { SuperEvent, SuperEventMatrix } from 'lib/event/interface'
 import { EventHandlerNode } from 'lib/event/object'
-import { SuperEvent, SuperEventMatrix } from 'lib/event/type'
-import { ConsoleLog, Echo, Eval, GetCacheItem, Pipe } from 'sementic_events'
-import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'type'
+import { ConsoleLog, Echo, Eval, GetCacheItem, Pipe } from 'lib/event/sementic'
+import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'lib/event/type'
 
 export function registerCommonPreloadIpcEventListeners(
   eh: EventHandlerNode<

@@ -1,6 +1,6 @@
-import { PopupLaunched } from 'sementic_events'
-import { initEventHandler } from './event/entity/popup-event-handler'
-import { initPopupToBackgroundEventInterface } from './event/interfaces'
+import { PopupLaunched } from 'lib/event/sementic';
+import { initEventHandler } from './event/entity/popup-event-handler';
+import { initPopupToBackgroundEventInterface } from './event/interfaces';
 
 console.log()
 ;(function () {

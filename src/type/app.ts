@@ -36,10 +36,6 @@ export type ExtensionConfig = {
   // workDir: string
 }
 
-export type ComponentUnion = 'MAIN' | 'RENDERER' | 'CONTENT_SCRIPT' | 'BACKGROUND' | 'SERVER' | 'MAIN_WORLD' | 'POPUP'
-
-export type AliasUnion = 'MAIN' | 'USER' | 'DIALOG' | 'BACKGROUND' | 'EXTENSION_TAB' | 'POPUP'
-
 // export type GyContext = {
 //   session: Session
 //   edr: DataRecord

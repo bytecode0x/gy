@@ -1,30 +1,30 @@
 // import { getCertificate } from 'local/desktop/main/certificate'
+import {
+    // GetTriggers,
+    AssertCertificate,
+    BackgroundReady,
+    // CallInternalApi,
+    CancelSchedule,
+    ConsoleLog,
+    Consume,
+    ContentScriptLoaded,
+    Dialog,
+    EvaluateSubstitute,
+    ExtMounted,
+    ExtUnMounted,
+    GetGyState,
+    GetMatrixFromEdr,
+    GetSessions,
+    Interpret,
+    InterpretObj,
+    Notify,
+    Ping,
+    RenewRequestDetail,
+    Serialize,
+    SetGyState
+} from 'lib/event/sementic'
 import { logger } from 'local/desktop/main/infra/logger'
 import { notify } from 'local/desktop/main/notification'
-import {
-  // GetTriggers,
-  AssertCertificate,
-  BackgroundReady,
-  // CallInternalApi,
-  CancelSchedule,
-  ConsoleLog,
-  Consume,
-  ContentScriptLoaded,
-  Dialog,
-  EvaluateSubstitute,
-  ExtMounted,
-  ExtUnMounted,
-  GetGyState,
-  GetMatrixFromEdr,
-  GetSessions,
-  Interpret,
-  InterpretObj,
-  Notify,
-  Ping,
-  RenewRequestDetail,
-  Serialize,
-  SetGyState
-} from 'sementic_events'
 
 import { app } from 'electron'
 import { interpret, interpretObj, serialize } from 'lib/gy/core/function'

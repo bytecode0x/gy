@@ -1,13 +1,14 @@
 import { ipcRenderer } from 'electron'
 import { EventHandlerNode } from 'lib/event/object'
-import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'type'
+import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'lib/event/type'
+import { registerCommonPreloadIpcEventListeners } from './common-ipc'
 import { initRendererToMainEventInterface } from './interface'
 
-declare global {
-  interface Window {
-    eh: EventHandlerNode<ComponentUnion, 'RENDERER', AliasUnion, AliasUnion, { MAIN: MainToRendererMeta }>
-  }
-}
+// declare global {
+//   interface Window {
+//     eh: EventHandlerNode<ComponentUnion, 'RENDERER', AliasUnion, AliasUnion, { MAIN: MainToRendererMeta }>
+//   }
+// }
 
 const webContentsId = ipcRenderer.sendSync('__ID__') as number
 
@@ -38,3 +39,5 @@ window.eh = eh
 const rendererMainInterface = initRendererToMainEventInterface(eh)
 
 eh.addInterface('MAIN', rendererMainInterface)
+
+registerCommonPreloadIpcEventListeners(eh)

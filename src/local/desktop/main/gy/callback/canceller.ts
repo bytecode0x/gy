@@ -1,5 +1,5 @@
+import { RemoveContextMenuItem } from 'lib/event/sementic'
 import { TriggerCanceller } from 'lib/gy/core/type/trigger'
-import { RemoveContextMenuItem } from 'sementic_events'
 import { getEvHandler } from '../../infra/event/event-handler'
 import { getCalendar } from '../../scheduler'
 import { TriggerPreset } from '../type/trigger.preset'

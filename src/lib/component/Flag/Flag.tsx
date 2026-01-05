@@ -1,6 +1,6 @@
+import { SetFlag } from 'lib/event/sementic'
 import { Div, FlexCenterDiv } from 'lib/frame/generic'
 import { FC, memo, useEffect, useState } from 'react'
-import { SetFlag } from 'sementic_events'
 import styled from 'styled-components'
 
 const Container = styled(FlexCenterDiv)`

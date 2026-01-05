@@ -1,5 +1,5 @@
 import { EventHandlerNode } from 'lib/event/object'
-import { AliasUnion, ComponentUnion, RendererToMainMeta } from 'type'
+import { AliasUnion, ComponentUnion, RendererToMainMeta } from 'lib/event/type'
 
 let eh: EventHandlerNode<ComponentUnion, 'MAIN', AliasUnion, 'MAIN', { RENDERER: RendererToMainMeta }>
 

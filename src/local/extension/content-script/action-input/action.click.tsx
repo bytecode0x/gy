@@ -4,32 +4,32 @@ import Minus from 'lib/asset/svg/Minus'
 import Plus from 'lib/asset/svg/Plus'
 import RawClose from 'lib/asset/svg/RawClose'
 import Undo from 'lib/asset/svg/Undo'
+import { SetGyState } from 'lib/event/sementic'
 import {
-  Abbr,
-  FlexCenterDiv,
-  FlexColumnDiv,
-  SVGButton,
-  TableData,
-  TableHeader,
-  TableRow,
-  TextButton
+    Abbr,
+    FlexCenterDiv,
+    FlexColumnDiv,
+    SVGButton,
+    TableData,
+    TableHeader,
+    TableRow,
+    TextButton
 } from 'lib/frame/generic'
 import { ElevatedButton, ElevatedForm, RecordItem } from 'lib/frame/sementic'
 import { getRandomColor } from 'lib/util/common'
 import {
-  createAppendingContainerWithRelativeCoordinates,
-  extractClass,
-  getChromeHeight,
-  getDocuments,
-  getOwnerIframe,
-  recursiveExtractSelector
+    createAppendingContainerWithRelativeCoordinates,
+    extractClass,
+    getChromeHeight,
+    getDocuments,
+    getOwnerIframe,
+    recursiveExtractSelector
 } from 'lib/util/dom/common'
 import { __Action__Click } from 'local/desktop/main/gy/type/action.preset'
 import { createMouseCapturer, drawMouseRecordOn } from 'local/extension/lib/function/record-mouse'
 import { createScraper } from 'local/extension/lib/function/scrape-element'
 import { FC, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { SetGyState } from 'sementic_events'
 import styled from 'styled-components'
 import { MouseTape } from 'type/app'
 import OverlayForm from '../components/OverlayForm'

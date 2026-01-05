@@ -1,4 +1,4 @@
-import { EventMatrix } from 'lib/event/type'
+import { EventMatrix } from 'lib/event/interface'
 import { $Action, Action, ActionInterfaceSuperset, ActionSchema } from 'lib/gy/core/type/action'
 import { DataRecord, Matrix } from 'lib/gy/core/type/primitive'
 import { ProcedureDescriptor, ProcedureSchema } from 'lib/gy/core/type/procedure'

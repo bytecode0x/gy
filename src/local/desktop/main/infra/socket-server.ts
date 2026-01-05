@@ -45,15 +45,10 @@ export function initializeSocketSever() {
           <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>요청에 실패했습니다</title>
+            <title>Fullfillment Failed</title>
           </head>
           <body>
-            <h1>요청에 실패했습니다<br />channel 은 반드시 입력돼야 합니다 <br />창이 3초 뒤에 닫힙니다</h1>
-            <script defer>
-              window.setTimeout(function () {
-                window.close()
-              }, 3000)
-            </script>
+            <h1>Fullfillment Failed</h1>
           </body>
         </html>
       `)
@@ -74,10 +69,15 @@ export function initializeSocketSever() {
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>성공적으로 요청했습니다</title>
+          <title>Fulfilled</title>
         </head>
         <body>
-          <h1>성공적으로 요청했습니다<br /></h1>
+          <h1>Fulfilled<br /></h1>
+          ${Object.entries(req.query)
+            .map(function ([channel, value]) {
+              return `<div><h2><b>${channel}</b></h2><h3>${value}</h3></div>`
+            })
+            .join('<br />')}
           <script defer>
             window.setTimeout(function () {
               window.close()

@@ -1,4 +1,4 @@
-import { EventMatrix } from 'lib/event/type'
+import { EventMatrix } from 'lib/event/interface'
 import { Script, ScriptDescriptor } from 'lib/gy/core/type/script'
 import { ComponentUnion } from 'type/app'
 

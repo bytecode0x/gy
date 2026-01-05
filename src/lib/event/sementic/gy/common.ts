@@ -1,4 +1,5 @@
-import { EventMatrix } from 'lib/event/type'
+import { EventMatrix } from 'lib/event/interface'
+import { ComponentUnion } from 'lib/event/type'
 import { Session } from 'lib/gy/core/class/session'
 import { Action } from 'lib/gy/core/type/action'
 import { Effect } from 'lib/gy/core/type/effect'
@@ -7,7 +8,7 @@ import { ProcedureSchema } from 'lib/gy/core/type/procedure'
 import { Task } from 'lib/gy/core/type/task'
 import { Gy } from 'local/desktop/main/gy/init'
 import { ActionPreset } from 'local/desktop/main/gy/type/action.preset'
-import { ComponentUnion, ExtensionStore } from 'type/app'
+import { ExtensionStore } from 'type/app'
 // export type Scrape = EventMatrix<
 //   'SCRAPE',
 //   'EXTENSION',

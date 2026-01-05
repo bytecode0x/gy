@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron'
 import { EventHandlerNode } from 'lib/event/object'
+import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'lib/event/type'
 import { edward, neo } from 'lib/gy/core/instance'
-import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'type'
 import { registerCommonPreloadIpcEventListeners } from './common-ipc'
 import { initRendererToMainEventInterface } from './interface'
 

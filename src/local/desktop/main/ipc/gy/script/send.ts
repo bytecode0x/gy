@@ -1,6 +1,6 @@
+import { FetchScript, FetchScriptDescriptors, PostScript, PostScriptDescriptor } from 'lib/event/sementic'
 import { Script, ScriptDescriptor } from 'lib/gy/core/type/script'
 import { getEvHandler } from 'local/desktop/main/infra/event/event-handler'
-import { FetchScript, FetchScriptDescriptors, PostScript, PostScriptDescriptor } from 'sementic_events'
 
 export function postScript({ script }: { script: Script }) {
   const evHandler = getEvHandler()

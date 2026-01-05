@@ -1,4 +1,4 @@
-import { ExtUnMounted, UnmountApp } from 'sementic_events'
+import { ExtUnMounted, UnmountApp } from 'lib/event/sementic'
 import { getEvHandler } from './event/entity/background-event-handler'
 
 let extTab: chrome.tabs.Tab | null = null

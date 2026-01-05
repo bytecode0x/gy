@@ -1,4 +1,4 @@
-import { SuperCoreLayerMessage } from '../type/message'
+import { SuperCoreLayerMessage } from '../interface/message'
 
 export type CustomEventOptions<TMessage extends SuperCoreLayerMessage = SuperCoreLayerMessage> = {
   type?: string

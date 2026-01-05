@@ -1,16 +1,16 @@
+import {
+    CopyProcedure,
+    CreateProcedureSchema,
+    GetProcedureDescriptors,
+    GetProcedureSchema,
+    InitializeProcess,
+    RemoveProcedures,
+    UpdateProcedureDescriptor,
+    UpdateProcedureSchema
+} from 'lib/event/sementic'
 import { setExtensionTab } from 'local/desktop/main/extension'
 import { getGy } from 'local/desktop/main/gy/init'
 import { getEvHandler } from 'local/desktop/main/infra/event/event-handler'
-import {
-  CopyProcedure,
-  CreateProcedureSchema,
-  GetProcedureDescriptors,
-  GetProcedureSchema,
-  InitializeProcess,
-  RemoveProcedures,
-  UpdateProcedureDescriptor,
-  UpdateProcedureSchema
-} from 'sementic_events'
 
 export function registerGyProcedureEventListeners() {
   const eh = getEvHandler()

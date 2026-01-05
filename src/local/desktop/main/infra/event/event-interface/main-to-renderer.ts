@@ -1,7 +1,7 @@
 import { ipcMain, webContents } from 'electron'
+import { SuperCoreLayerMessage } from 'lib/event/interface/message'
 import { EventHandlerJS, EventHandlerNode, EventInterface } from 'lib/event/object'
-import { SuperCoreLayerMessage } from 'lib/event/type/message'
-import { AliasUnion, ComponentUnion, RendererToMainMeta } from 'type'
+import { AliasUnion, ComponentUnion, RendererToMainMeta } from 'lib/event/type'
 import { v4 } from 'uuid'
 
 let mainRendererInterface: EventInterface<'MAIN', 'RENDERER', RendererToMainMeta>

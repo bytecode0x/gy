@@ -1,7 +1,7 @@
 import Cancel from 'lib/asset/svg/Cancel'
+import { SetVisible } from 'lib/event/sementic'
 import { SVGButton } from 'lib/frame/generic'
 import React, { memo, useCallback } from 'react'
-import { SetVisible } from 'sementic_events'
 import styled from 'styled-components'
 
 const Container = styled(SVGButton)``

@@ -1,7 +1,7 @@
 import { BrowserWindow } from 'electron'
 import { NoReply } from 'lib/event/error'
+import { Dialog, RendererReady } from 'lib/event/sementic'
 import path from 'path'
-import { Dialog, RendererReady } from 'sementic_events'
 import { getEvHandler } from './infra/event/event-handler'
 
 export function openDialog(options: Dialog['payload'], windowOptions?: { width?: number; height?: number }) {

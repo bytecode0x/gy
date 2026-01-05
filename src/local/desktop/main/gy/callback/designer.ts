@@ -1,21 +1,21 @@
+import { InputActionSchema } from 'lib/event/sementic'
 import { ActionDesigner, ActionSchema } from 'lib/gy/core/type/action'
-import { InputActionSchema } from 'sementic_events'
 import { getExtensionTab } from '../../extension'
 import { getEvHandler } from '../../infra/event/event-handler'
 import {
-  __Action__Click,
-  __Action__Define,
-  __Action__EditImage,
-  __Action__EvalBindingTab,
-  __Action__Extract,
-  __Action__InitiateProcedure,
-  __Action__LoadUrl,
-  __Action__OpenAIAssistant,
-  __Action__Pause,
-  __Action__Scrape,
-  __Action__Select,
-  __Action__Type,
-  ActionPreset
+    __Action__Click,
+    __Action__Define,
+    __Action__EditImage,
+    __Action__EvalBindingTab,
+    __Action__Extract,
+    __Action__InitiateProcedure,
+    __Action__LoadUrl,
+    __Action__OpenAIAssistant,
+    __Action__Pause,
+    __Action__Scrape,
+    __Action__Select,
+    __Action__Type,
+    ActionPreset
 } from '../type/action.preset'
 
 export const SNAPSHOT_MAX_DATA_LENGTH = 100

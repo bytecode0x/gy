@@ -1,7 +1,7 @@
 import { config as dotenv } from 'dotenv'
 import { app, BrowserWindow, ipcMain, session } from 'electron'
+import { Ping, SetConnectionStatus, UnmountApp } from 'lib/event/sementic'
 import path from 'path'
-import { Ping, SetConnectionStatus, UnmountApp } from 'sementic_events'
 import { APP_NAME } from 'specifications'
 import { appStore } from './app-store'
 import { getGy, initGy } from './gy/init'

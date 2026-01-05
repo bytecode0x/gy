@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import PullLeft from 'lib/asset/svg/PullLeft'
 import { Shrinker } from 'lib/component/Shrinker'
+import { UnmountApp } from 'lib/event/sementic'
 import { Div, FlexCenterDiv, FlexColumnDiv, FlexDiv } from 'lib/frame/generic'
 import { SCROLL } from 'lib/styled-css-property'
 import GlobalUtility from 'local/extension/content-script/components/GlobalUtility'
@@ -8,7 +9,6 @@ import { getEvHandler } from 'local/extension/content-script/event/entity/conten
 import { getStore, setOverlay } from 'local/extension/content-script/store'
 import { useCallback, useEffect, useRef } from 'react'
 import { Route, Routes, useNavigate } from 'react-router-dom'
-import { UnmountApp } from 'sementic_events'
 import styled from 'styled-components'
 import AuthState from '../../components/Auth'
 import Navigator from '../../components/Navigator'

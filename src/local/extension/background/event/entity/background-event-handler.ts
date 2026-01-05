@@ -1,43 +1,43 @@
 import { NoReply } from 'lib/event/error'
+import { SuperEvent, SuperEventMatrix } from 'lib/event/interface'
 import { EventHandlerJS } from 'lib/event/object'
-import { SuperEvent, SuperEventMatrix } from 'lib/event/type'
+import {
+    AssertCertificate,
+    CheckNativeConnection,
+    ConsoleLog,
+    ContentScriptLoaded,
+    CreateContextMenuItem,
+    CreateTab,
+    Echo,
+    ExtMounted,
+    GetGyState,
+    GetState,
+    GetTab,
+    GetTabId,
+    InitializeProcess,
+    Invoke,
+    MountApp,
+    Notify,
+    Pagination,
+    Ping,
+    Pipe,
+    PopupLaunched,
+    QueryTabs,
+    RemoveContextMenuItem,
+    RemoveTab,
+    RenewRequestDetail,
+    Subcontract,
+    UnmountApp
+} from 'lib/event/sementic'
 import { DataRecord } from 'lib/gy/core/type/primitive'
 import {
-  __Action__Click,
-  __Action__EvalBindingTab,
-  __Action__LoadUrl,
-  __Action__Scrape,
-  __Action__Select,
-  ActionPreset
+    __Action__Click,
+    __Action__EvalBindingTab,
+    __Action__LoadUrl,
+    __Action__Scrape,
+    __Action__Select,
+    ActionPreset
 } from 'local/desktop/main/gy/type/action.preset'
-import {
-  AssertCertificate,
-  CheckNativeConnection,
-  ConsoleLog,
-  ContentScriptLoaded,
-  CreateContextMenuItem,
-  CreateTab,
-  Echo,
-  ExtMounted,
-  GetGyState,
-  GetState,
-  GetTab,
-  GetTabId,
-  InitializeProcess,
-  Invoke,
-  MountApp,
-  Notify,
-  Pagination,
-  Ping,
-  Pipe,
-  PopupLaunched,
-  QueryTabs,
-  RemoveContextMenuItem,
-  RemoveTab,
-  RenewRequestDetail,
-  Subcontract,
-  UnmountApp
-} from 'sementic_events'
 import { AliasUnion, AppStore, ComponentUnion, ContentScriptToBackgroundMeta, PopupToBackgroundMeta } from 'type'
 import { getExtensionTab, setExtensionTab, unmountApp } from '../../app'
 import { getSocketClient, initSocketClient } from '../../infra/socket-client'

@@ -1,5 +1,5 @@
+import { ConsoleLog, ContentScriptLoaded } from 'lib/event/sementic'
 import { assertRedirection } from 'lib/util/dom/common'
-import { ConsoleLog, ContentScriptLoaded } from 'sementic_events'
 import { getEvHandler, initContentEvHandler } from './event/entity/content-event-handler'
 import { createContainer } from './functions/app'
 

@@ -1,4 +1,4 @@
-import { EventMatrix } from 'lib/event/type'
+import { EventMatrix } from 'lib/event/interface'
 import { Trigger } from 'lib/gy/core/type/trigger'
 import { TriggerPreset } from 'local/desktop/main/gy/type/trigger.preset'
 

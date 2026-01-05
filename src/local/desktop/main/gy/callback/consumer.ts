@@ -1,4 +1,5 @@
 import { BrowserWindow } from 'electron'
+import { Dialog, Eval, GetTab, HideApp, Pipe, QueryTabs, ShowApp, Subcontract } from 'lib/event/sementic'
 import { keyboard, mouse } from 'lib/genie'
 import { Resource } from 'lib/gy/core/class/resource'
 import { interpretObj, runScript } from 'lib/gy/core/function'
@@ -7,7 +8,6 @@ import { dataRecordSchema, matrixSchema } from 'lib/gy/core/literal/zod-schema'
 import { $Action, Action, ActionConsumer } from 'lib/gy/core/type/action'
 import { DataRecord } from 'lib/gy/core/type/primitive'
 import OpenAI from 'openai'
-import { Dialog, Eval, GetTab, HideApp, Pipe, QueryTabs, ShowApp, Subcontract } from 'sementic_events'
 import { v4 } from 'uuid'
 import { openAssistant } from '../../assistant-window'
 import { addCacheItem, removeCacheItem } from '../../cache'
@@ -569,7 +569,7 @@ export const consumer: ActionConsumer<ActionPreset> = {
                 value: {}
               }
             ].concat(params || []),
-            meta: { edrKey }
+            meta: { cacheKey: edrKey }
           }
         })
 
@@ -639,7 +639,7 @@ export const consumer: ActionConsumer<ActionPreset> = {
                   value: {}
                 }
               ].concat(params || []),
-              meta: { edrKey }
+              meta: { cacheKey: edrKey }
             },
             meta: { receiver: { component: 'MAIN_WORLD', id: 0 } }
           },

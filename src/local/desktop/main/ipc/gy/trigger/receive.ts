@@ -1,6 +1,6 @@
+import { CancelTrigger, SetTrigger } from 'lib/event/sementic'
 import { getGy } from 'local/desktop/main/gy/init'
 import { getEvHandler } from 'local/desktop/main/infra/event/event-handler'
-import { CancelTrigger, SetTrigger } from 'sementic_events'
 
 export function registerGyTriggerEventListeners() {
   const evHandler = getEvHandler()

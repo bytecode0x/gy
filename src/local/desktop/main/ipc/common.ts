@@ -1,5 +1,4 @@
 import { app, BrowserWindow, dialog, shell, webContents } from 'electron'
-import { appStore } from 'local/desktop/main/app-store'
 import {
   __Electron__LoadUrl,
   AlwaysOnTopWindow,
@@ -31,14 +30,16 @@ import {
   SetWorkDir,
   ThrowError,
   WriteFile
-} from 'sementic_events'
+} from 'lib/event/sementic'
+import { appStore } from 'local/desktop/main/app-store'
 
 import fs from 'fs'
 import { NoReply } from 'lib/event/error'
-import { SuperEvent, SuperEventMatrix } from 'lib/event/type/event'
+import { SuperEvent, SuperEventMatrix } from 'lib/event/interface/event'
+import { AliasUnion, ComponentUnion } from 'lib/event/type'
 import { runScript } from 'lib/gy/core/function'
 import { deepMerge } from 'lib/util/common'
-import { AliasUnion, AppStore, ComponentUnion } from 'type/app'
+import { AppStore } from 'type/app'
 import { getCache } from '../cache'
 import { getEvHandler } from '../infra/event/event-handler'
 import { logger } from '../infra/logger'

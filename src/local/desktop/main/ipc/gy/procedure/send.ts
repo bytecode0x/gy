@@ -1,13 +1,13 @@
+import {
+    FetchProcedureDescriptors,
+    FetchProcedureSchema,
+    PostProcedureDescriptor,
+    PostProcedureSchema,
+    RemoveProcedures
+} from 'lib/event/sementic'
 import { ProcedureDescriptor, ProcedureSchema } from 'lib/gy/core/type/procedure'
 import { TriggerPreset } from 'local/desktop/main/gy/type/trigger.preset'
 import { getEvHandler } from 'local/desktop/main/infra/event/event-handler'
-import {
-  FetchProcedureDescriptors,
-  FetchProcedureSchema,
-  PostProcedureDescriptor,
-  PostProcedureSchema,
-  RemoveProcedures
-} from 'sementic_events'
 
 export function postProcedureDescriptor({ descriptor }: { descriptor: ProcedureDescriptor<TriggerPreset> }) {
   const evHandler = getEvHandler()

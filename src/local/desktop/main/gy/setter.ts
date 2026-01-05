@@ -1,6 +1,6 @@
+import { CreateContextMenuItem } from 'lib/event/sementic'
 import { TriggerSetter } from 'lib/gy/core/type/trigger'
 import { RRule } from 'rrule'
-import { CreateContextMenuItem } from 'sementic_events'
 import { getEvHandler } from '../infra/event/event-handler'
 import { logger } from '../infra/logger'
 import { occurr } from '../scheduler'

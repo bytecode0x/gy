@@ -1,5 +1,5 @@
 import { ComponentUnion, ExtensionStore } from 'type/app'
-import { EventMatrix } from '../lib/event/type/event'
+import { EventMatrix } from '../interface/event'
 
 export type GetTabId = EventMatrix<'GET_TAB_ID', 'CONTENT_SCRIPT', 'BACKGROUND', undefined, number>
 

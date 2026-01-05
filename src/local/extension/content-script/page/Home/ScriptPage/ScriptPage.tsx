@@ -1,4 +1,5 @@
 import Plus from 'lib/asset/svg/Plus'
+import { CreateScript } from 'lib/event/sementic'
 import { FlexDiv, SVGButton } from 'lib/frame/generic'
 import Script from 'local/extension/content-script/components/Script'
 import { getEvHandler } from 'local/extension/content-script/event/entity/content-event-handler'
@@ -6,7 +7,6 @@ import { safeGetBody } from 'local/extension/content-script/functions/app'
 import { getStore } from 'local/extension/content-script/store'
 import { useCallback } from 'react'
 import { createPortal } from 'react-dom'
-import { CreateScript } from 'sementic_events'
 import styled from 'styled-components'
 import shallow from 'zustand/shallow'
 

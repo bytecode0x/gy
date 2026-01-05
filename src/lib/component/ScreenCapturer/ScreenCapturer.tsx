@@ -5,13 +5,13 @@
 import Finish from 'lib/asset/svg/Finish'
 import RawClose from 'lib/asset/svg/RawClose'
 import Undo from 'lib/asset/svg/Undo'
+import { CloseWindow } from 'lib/event/sementic'
 import { FlexCenterDiv, FlexColumnDiv, FlexDiv } from 'lib/frame/generic'
 import { ElevatedButton, ElevatedForm } from 'lib/frame/sementic'
 import { getRandomColor } from 'lib/util/common'
 import { createMouseCapturer } from 'local/extension/lib/function/record-mouse'
 import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { CloseWindow } from 'sementic_events'
 import styled from 'styled-components'
 
 const Container = styled(FlexDiv)`

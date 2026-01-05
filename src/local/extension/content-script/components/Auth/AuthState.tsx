@@ -1,9 +1,9 @@
 import ThreeDotLoader from 'lib/asset/svg/ThreeDotLoader'
 import User from 'lib/asset/svg/User'
+import { GetCertificate } from 'lib/event/sementic'
 import { FlexCenterDiv, Span, SVGSpanButton } from 'lib/frame/generic'
 import { getEvHandler } from 'local/extension/content-script/event/entity/content-event-handler'
 import React, { useEffect, useState } from 'react'
-import { GetCertificate } from 'sementic_events'
 import styled from 'styled-components'
 import { __Local__Certificate } from 'type/app'
 

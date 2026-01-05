@@ -1,5 +1,5 @@
+import { SuperCoreLayerMessage } from 'lib/event/interface'
 import { EventHandlerJS, EventHandlerNode, EventInterface } from 'lib/event/object'
-import { SuperCoreLayerMessage } from 'lib/event/type'
 import { AliasUnion, ComponentUnion, ContentScriptToBackgroundMeta } from 'type'
 import { v4 } from 'uuid'
 

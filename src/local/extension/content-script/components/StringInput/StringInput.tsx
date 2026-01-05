@@ -1,10 +1,10 @@
 import Rectangle from 'lib/asset/svg/Rectangle'
+import { EvaluateSubstitute } from 'lib/event/sementic'
 import { FlexCenterDiv, FlexColumnDiv, FlexDiv, Span, TextArea, TextButton } from 'lib/frame/generic'
 import { DataRecord } from 'lib/gy/core/type/primitive'
 import { SCROLL } from 'lib/styled-css-property'
 import { getEvHandler } from 'local/extension/content-script/event/entity/content-event-handler'
 import { FC, useEffect, useRef, useState } from 'react'
-import { EvaluateSubstitute } from 'sementic_events'
 
 import styled from 'styled-components'
 

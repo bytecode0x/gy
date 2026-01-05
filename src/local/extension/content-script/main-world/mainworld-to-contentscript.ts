@@ -1,5 +1,5 @@
+import { EventMatrix, SuperCoreLayerMessage } from 'lib/event/interface'
 import { EventHandlerJS, EventInterface } from 'lib/event/object'
-import { EventMatrix, SuperCoreLayerMessage } from 'lib/event/type'
 import { ContentScriptToMainWorldMeta } from 'type'
 import { AliasUnion, ComponentUnion } from 'type/app'
 import { v4 } from 'uuid'
