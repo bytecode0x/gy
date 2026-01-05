@@ -157,7 +157,7 @@ export const EVAL_BINDING_TAB: ActionInput<__Action__EvalBindingTab> = {
                                 payload: {
                                   code,
                                   params: [{ id: 'prxy', value: substitutes }].concat(params),
-                                  meta: { edrKey: '0' }
+                                  meta: { cacheKey: '0' }
                                 },
                                 meta: { receiver: { component: 'MAIN_WORLD', id: 0 } }
                               })

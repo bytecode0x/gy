@@ -26,6 +26,7 @@ initStore({
     theme: 'dark'
   },
   gy: {
+    procedures: [],
     $gdr: {},
     $procedures: [],
     $scripts: [],

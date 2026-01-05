@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron'
 import { EventHandlerNode } from 'lib/event/object'
+import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'lib/event/type'
 import OpenAI from 'openai'
-import { AliasUnion, ComponentUnion, MainToRendererMeta } from 'type'
 import { initRendererToMainEventInterface } from './interface/renderer-to-main'
 
 declare global {

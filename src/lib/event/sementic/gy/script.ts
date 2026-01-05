@@ -1,6 +1,6 @@
 import { EventMatrix } from 'lib/event/interface'
+import { ComponentUnion } from 'lib/event/type'
 import { Script, ScriptDescriptor } from 'lib/gy/core/type/script'
-import { ComponentUnion } from 'type/app'
 
 export type FetchScriptDescriptors = EventMatrix<
   'FETCH_SCRIPTS_DESCRIPTORS',

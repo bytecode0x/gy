@@ -1,6 +1,6 @@
 import { SuperCoreLayerMessage } from 'lib/event/interface'
 import { EventHandlerJS, EventInterface } from 'lib/event/object'
-import { AliasUnion, BackgroundToContentScriptMeta, ComponentUnion } from 'type'
+import { AliasUnion, BackgroundToContentScriptMeta, ComponentUnion } from 'lib/event/type'
 import { v4 } from 'uuid'
 
 let contentScriptBackground: EventInterface<'CONTENT_SCRIPT', 'BACKGROUND', BackgroundToContentScriptMeta>

@@ -1,5 +1,5 @@
+import { AliasUnion, ComponentUnion } from 'lib/event/type';
 import { DeepPartial } from 'lib/util/common';
-import { AliasUnion, ComponentUnion } from 'type/app';
 import { EventMatrix } from '../interface';
 
 export type Dialog =

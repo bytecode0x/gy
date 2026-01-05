@@ -1,7 +1,7 @@
 import { EventMatrix } from 'lib/event/interface'
+import { ComponentUnion } from 'lib/event/type'
 import type { DataNode } from 'lib/gy/core/class/data-node'
 import { SerializedDataTree, TreeDescriptor, TreeFindOptions } from 'lib/gy/core/type/tree'
-import { ComponentUnion } from 'type/app'
 
 export type PostTree = EventMatrix<'POST_TREE', ComponentUnion, 'SERVER', { tree: SerializedDataTree }>
 

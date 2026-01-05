@@ -1,5 +1,5 @@
 import { EventHandlerJS } from 'lib/event/object'
-import { AliasUnion, BackgroundToPopupMeta, ComponentUnion } from 'type'
+import { AliasUnion, BackgroundToPopupMeta, ComponentUnion } from 'lib/event/type'
 
 let evHandler: EventHandlerJS<
   ComponentUnion,

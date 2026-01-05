@@ -1,4 +1,5 @@
 import { EventMatrix } from 'lib/event/interface'
+import { ComponentUnion } from 'lib/event/type'
 import { $Action, Action, ActionInterfaceSuperset, ActionSchema } from 'lib/gy/core/type/action'
 import { DataRecord, Matrix } from 'lib/gy/core/type/primitive'
 import { ProcedureDescriptor, ProcedureSchema } from 'lib/gy/core/type/procedure'
@@ -6,7 +7,6 @@ import { DataTree } from 'lib/gy/core/type/tree'
 import { Gy } from 'local/desktop/main/gy/init'
 import { ActionPreset } from 'local/desktop/main/gy/type/action.preset'
 import { TriggerPreset } from 'local/desktop/main/gy/type/trigger.preset'
-import { ComponentUnion } from 'type/app'
 
 export type DesignActionSchema<TAction extends ActionPreset = ActionPreset> = EventMatrix<
   'DESIGN_ACTION_SCHEMA',

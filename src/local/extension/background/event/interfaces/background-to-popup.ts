@@ -1,6 +1,6 @@
 import { SuperCoreLayerMessage } from 'lib/event/interface'
 import { EventHandlerJS, EventHandlerNode, EventInterface } from 'lib/event/object'
-import { AliasUnion, ComponentUnion, ContentScriptToBackgroundMeta, PopupToBackgroundMeta } from 'type'
+import { AliasUnion, ComponentUnion, ContentScriptToBackgroundMeta, PopupToBackgroundMeta } from 'lib/event/type'
 import { v4 } from 'uuid'
 
 let backgroundPopup: EventInterface<'BACKGROUND', 'POPUP', PopupToBackgroundMeta>

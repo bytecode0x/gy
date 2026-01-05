@@ -1,6 +1,6 @@
 import { EventMatrix, SuperEvent } from 'lib/event/interface/event'
 import { SendingMessage } from 'lib/event/interface/message'
-import { ComponentUnion } from 'type/app'
+import { ComponentUnion } from 'lib/event/type'
 
 export type GetCache = EventMatrix<'GET_CACHE', ComponentUnion, 'MAIN', undefined, Object>
 

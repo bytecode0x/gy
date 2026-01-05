@@ -1,5 +1,5 @@
 import { EventHandlerJS } from 'lib/event/object'
-import { AliasUnion, ComponentUnion, ContentScriptToMainWorldMeta } from 'type'
+import { AliasUnion, ComponentUnion, ContentScriptToMainWorldMeta } from 'lib/event/type'
 import { initMainWorldToContentScriptEventInterface } from './mainworld-to-contentscript'
 
 let eh: EventHandlerJS<

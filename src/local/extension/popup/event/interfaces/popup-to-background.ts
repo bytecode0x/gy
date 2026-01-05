@@ -1,6 +1,6 @@
 import { SuperCoreLayerMessage } from 'lib/event/interface'
 import { EventHandlerJS, EventHandlerNode, EventInterface } from 'lib/event/object'
-import { AliasUnion, BackgroundToPopupMeta, ComponentUnion } from 'type'
+import { AliasUnion, BackgroundToPopupMeta, ComponentUnion } from 'lib/event/type'
 
 import { v4 } from 'uuid'
 
