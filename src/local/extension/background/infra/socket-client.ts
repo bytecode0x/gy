@@ -1,9 +1,11 @@
+import { LOCAL_SERVER_PORT } from 'specifications'
+
 let socket: WebSocket
 
 export function initSocketClient() {
   return new Promise<void>(function (resolve, reject) {
     try {
-      socket = new WebSocket('ws://localhost:15171')
+      socket = new WebSocket(`ws://localhost:${LOCAL_SERVER_PORT}`)
     } catch (e) {
       return reject(e)
     }

@@ -3,6 +3,7 @@ import 'dotenv/config'
 import express, { RequestHandler } from 'express'
 import http from 'http'
 import { SocketServerNode } from 'lib/socket/class'
+import { LOCAL_SERVER_PORT } from 'specifications'
 import { WebSocket } from 'ws'
 import { getEvHandler } from './event/event-handler'
 import { logger } from './logger'
@@ -88,7 +89,7 @@ export function initializeSocketSever() {
     `)
   })
 
-  const port = 15171
+  const port = LOCAL_SERVER_PORT
 
   /**
    * loads are in body at POST
